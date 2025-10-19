@@ -13,7 +13,6 @@ import {
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { ArrowRight, Target, TrendingUp, Users, Award } from "lucide-react";
-
 export const Home = () => {
   const fadeUp = {
     hidden: { opacity: 0, y: 30, scale: 0.98, willChange: "transform" },
@@ -251,13 +250,13 @@ export const Home = () => {
           ].map((focus, i) => (
             <motion.div key={i} variants={fadeUp}>
               <Card
-                className={`h-[200px] hover:scale-[1.03] transition-transform rounded-3xl shadow-md bg-gradient-to-br ${focus.gradient} border`}
+                className={`min-h-[200px] hover:scale-[1.03] transition-transform rounded-3xl shadow-md bg-gradient-to-br ${focus.gradient} border`}
               >
                 <CardHeader>
                   <CardTitle className="text-2xl font-semibold mb-2">
                     {focus.title}
                   </CardTitle>
-                  <CardDescription className="text-lg text-muted-foreground">
+                  <CardDescription className="text-lg text-muted-foreground pb-3">
                     {focus.description}
                   </CardDescription>
                 </CardHeader>
@@ -351,7 +350,7 @@ export const Home = () => {
 
       {/* CTA SECTION */}
       <motion.section
-        className="container mx-auto px-4 py-24"
+        className="container mx-auto px-4 pt-12 pb-12"
         initial="hidden"
         whileInView="show"
         variants={fadeUp}

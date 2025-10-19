@@ -1,3 +1,4 @@
+// src/components/Contact.jsx
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
@@ -7,12 +8,12 @@ import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Badge } from './ui/badge';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { 
-  MailIcon, 
-  PhoneIcon, 
-  MapPinIcon, 
-  LinkedinIcon, 
-  TwitterIcon, 
+import {
+  MailIcon,
+  PhoneIcon,
+  MapPinIcon,
+  LinkedinIcon,
+  TwitterIcon,
   CalendarIcon,
   FileTextIcon,
   MessageCircleIcon,
@@ -88,30 +89,48 @@ export const Contact = () => {
   ];
 
   return (
-    <div className="py-8 space-y-16">
-      {/* Header */}
-      <section className="container mx-auto px-4">
-        <div className="text-center space-y-4 mb-12">
-          <h1 className="text-4xl lg:text-5xl">Get in Touch</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Whether you're a founder looking to raise capital, a fellow investor, or someone interested in our work, we'd love to hear from you.
+    <div className="bg-white text-foreground overflow-hidden">
+      {/* HERO HEADER */}
+      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[50vh] flex items-center justify-center text-center">
+        <div className="max-w-3xl mx-auto px-4">
+          <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">
+            Get in Touch
+          </h1>
+          <p className="text-lg text-primary-foreground/90 leading-relaxed">
+            Whether you're a founder raising capital, a partner, or simply curious about our work — we’d love to connect.
+          </p>
+        </div>
+      </section>
+
+      {/* CONTACT METHODS */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="text-center space-y-4 mb-16">
+          <h2 className="text-4xl font-bold">Reach Out</h2>
+          <p className="text-muted-foreground max-w-3xl mx-auto text-lg">
+            Choose a method that works best for you — email, meeting, or social.
           </p>
         </div>
 
-        {/* Quick Contact Methods */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {contactMethods.map((method, index) => (
-            <Card key={index} className="group hover:shadow-lg transition-shadow cursor-pointer">
-              <CardContent className="pt-6 text-center space-y-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+            <Card
+              key={index}
+              className="group rounded-3xl border border-gray-100 shadow-md hover:shadow-xl transition-all bg-white text-center"
+            >
+              <CardContent className="pt-8 pb-8 space-y-5">
+                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                   <method.icon className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="mb-1">{method.title}</h3>
+                  <h3 className="font-semibold text-lg mb-1">{method.title}</h3>
                   <p className="text-sm text-muted-foreground mb-2">{method.description}</p>
                   <p className="text-sm">{method.contact}</p>
                 </div>
-                <Button size="sm" variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary"
+                >
                   {method.action}
                 </Button>
               </CardContent>
@@ -120,16 +139,16 @@ export const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form */}
-      <section className="container mx-auto px-4">
+      {/* CONTACT FORM */}
+      <section className="container mx-auto px-4 pb-20">
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Form */}
+          {/* FORM */}
           <div>
-            <Card>
+            <Card className="rounded-3xl border border-gray-100 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-2xl">Send us a Message</CardTitle>
+                <CardTitle className="text-2xl font-bold">Send Us a Message</CardTitle>
                 <CardDescription>
-                  Fill out the form below and we'll get back to you as soon as possible.
+                  Fill out the form below — we’ll respond within 2 business days.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -176,8 +195,8 @@ export const Contact = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="message">Message *</Label>
-                  <Textarea 
-                    id="message" 
+                  <Textarea
+                    id="message"
                     placeholder="Tell us about your startup, partnership opportunity, or inquiry..."
                     className="min-h-[120px]"
                   />
@@ -190,7 +209,7 @@ export const Contact = () => {
                       I agree to the privacy policy and terms of service
                     </Label>
                   </div>
-                  
+
                   <Button size="lg" className="w-full">
                     Send Message
                   </Button>
@@ -199,22 +218,24 @@ export const Contact = () => {
             </Card>
           </div>
 
-          {/* Inquiry Types & Info */}
+          {/* INQUIRY TYPES */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-xl mb-6">Inquiry Types</h3>
+              <h3 className="text-xl font-semibold mb-6">Inquiry Types</h3>
               <div className="space-y-4">
                 {inquiryTypes.map((inquiry, index) => (
-                  <Card key={index}>
+                  <Card key={index} className="rounded-2xl border-gray-100 shadow-sm hover:shadow-md transition">
                     <CardContent className="pt-4">
                       <div className="flex items-start space-x-3">
                         <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                           <inquiry.icon className="h-4 w-4 text-primary" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="mb-1">{inquiry.type}</h4>
+                          <h4 className="font-semibold mb-1">{inquiry.type}</h4>
                           <p className="text-sm text-muted-foreground mb-2">{inquiry.description}</p>
-                          <Badge variant="outline" className="text-xs">{inquiry.timeline}</Badge>
+                          <Badge variant="outline" className="text-xs">
+                            {inquiry.timeline}
+                          </Badge>
                         </div>
                       </div>
                     </CardContent>
@@ -224,16 +245,16 @@ export const Contact = () => {
             </div>
 
             <div>
-              <h3 className="text-xl mb-6">For Founders</h3>
-              <Card className="bg-primary/5 border-primary/20">
+              <h3 className="text-xl font-semibold mb-6">For Founders</h3>
+              <Card className="bg-primary/5 border-primary/20 rounded-2xl">
                 <CardContent className="pt-6">
                   <div className="space-y-4">
                     <div className="flex items-center space-x-2">
                       <RocketIcon className="h-5 w-5 text-primary" />
-                      <h4>Raising Capital?</h4>
+                      <h4 className="font-semibold">Raising Capital?</h4>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      If you're looking to raise capital, please include the following in your message:
+                      Include the following details in your message:
                     </p>
                     <ul className="space-y-1 text-sm text-muted-foreground">
                       <li className="flex items-start space-x-2">
@@ -261,19 +282,22 @@ export const Contact = () => {
         </div>
       </section>
 
-      {/* Office Locations */}
-      <section className="bg-muted/50">
-        <div className="container mx-auto px-4 py-16">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl">Our Offices</h2>
-            <p className="text-muted-foreground">
-              Visit us at our locations in San Francisco and New York
+      {/* OFFICE LOCATIONS */}
+      <section className="bg-gray-50 py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12 space-y-3">
+            <h2 className="text-4xl font-bold">Our Offices</h2>
+            <p className="text-muted-foreground text-lg">
+              Visit us at our offices in San Francisco and New York.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {offices.map((office, index) => (
-              <Card key={index}>
+              <Card
+                key={index}
+                className="rounded-3xl border border-gray-100 shadow-md hover:shadow-lg bg-white transition"
+              >
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <MapPinIcon className="h-5 w-5 text-primary" />
@@ -285,7 +309,7 @@ export const Contact = () => {
                     <p className="text-sm text-muted-foreground">Address</p>
                     <p className="whitespace-pre-line">{office.address}</p>
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <p className="text-sm text-muted-foreground">Phone</p>
@@ -315,12 +339,12 @@ export const Contact = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="container mx-auto px-4">
-        <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl">Frequently Asked Questions</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Common questions about our investment process and what we look for in startups
+      {/* FAQ SECTION */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="text-center space-y-3 mb-12">
+          <h2 className="text-4xl font-bold">Frequently Asked Questions</h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Common questions about our investment process and what we look for in startups.
           </p>
         </div>
 
@@ -328,32 +352,41 @@ export const Contact = () => {
           {[
             {
               question: 'What stage companies do you invest in?',
-              answer: 'We primarily invest in seed and Series A companies, with check sizes ranging from $500K to $5M. We occasionally invest in pre-seed rounds for exceptional founders.'
+              answer:
+                'We invest in seed and Series A companies with check sizes from $500K to $5M. Exceptional pre-seed founders are also considered.'
             },
             {
               question: 'How long is your investment process?',
-              answer: 'Our investment process typically takes 4-6 weeks from initial meeting to term sheet. We aim to provide quick feedback and move efficiently through due diligence.'
+              answer:
+                'Our process typically takes 4–6 weeks from initial meeting to term sheet, with quick feedback at each stage.'
             },
             {
               question: 'Do you lead rounds?',
-              answer: 'Yes, we can lead or co-lead rounds, especially for seed and Series A investments. We also participate in rounds led by other investors when there\'s strong strategic alignment.'
+              answer:
+                'Yes, we lead or co-lead seed and Series A rounds and participate in strong syndicates for strategic alignment.'
             },
             {
               question: 'What geographic regions do you invest in?',
-              answer: 'We primarily invest in North American companies but are open to exceptional opportunities globally, especially in English-speaking markets.'
+              answer:
+                'Primarily North America, but open to exceptional founders globally, especially in English-speaking markets.'
             },
             {
               question: 'What support do you provide portfolio companies?',
-              answer: 'We provide hands-on support in areas like product strategy, go-to-market planning, hiring, follow-on fundraising, and connecting with our network of customers and partners.'
+              answer:
+                'We provide hands-on help in product strategy, go-to-market planning, hiring, fundraising, and partnerships.'
             },
             {
               question: 'How do I submit my pitch deck?',
-              answer: 'You can submit your pitch deck through our contact form above, email us directly, or schedule a meeting through our calendar link. We review all submissions within 2 business days.'
+              answer:
+                'Submit via the contact form, email, or schedule a call — we review all decks within 2 business days.'
             }
           ].map((faq, index) => (
-            <Card key={index}>
+            <Card
+              key={index}
+              className="rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition"
+            >
               <CardHeader>
-                <CardTitle className="text-lg">{faq.question}</CardTitle>
+                <CardTitle className="text-lg font-semibold">{faq.question}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">{faq.answer}</p>
@@ -363,19 +396,23 @@ export const Contact = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="container mx-auto px-4">
-        <Card className="bg-primary text-primary-foreground">
+      {/* CTA SECTION */}
+      <section className="container mx-auto px-4 pb-20">
+        <Card className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground rounded-3xl shadow-lg">
           <CardContent className="text-center py-16">
-            <h2 className="text-3xl mb-4">Ready to Build Something Amazing?</h2>
+            <h2 className="text-4xl font-bold mb-4">Ready to Build Something Amazing?</h2>
             <p className="text-xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
               Whether you're just getting started or ready to scale, we're here to support ambitious founders building the future.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary">
+              <Button size="lg" variant="secondary" className='hover:bg-transparent hover:text-white hover:border-white hover:border'>
                 Schedule a Meeting
               </Button>
-              <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              >
                 Send Your Pitch Deck
               </Button>
             </div>

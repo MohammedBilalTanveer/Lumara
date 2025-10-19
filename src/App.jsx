@@ -8,6 +8,7 @@ import { VentureStudio } from './components/VentureStudio';
 import { News } from './components/News';
 import { Contact } from './components/Contact';
 import { Navigation } from './components/Navigation';
+import { Footer } from './components/Footer';
 
 /**
  * @typedef {'home'|'about'|'portfolio'|'investment'|'venturestudio'|'news'|'contact'} Page
@@ -41,6 +42,8 @@ export default function App() {
     <div className="min-h-screen bg-background">
       <Navigation currentPage={currentPage} onPageChange={setCurrentPage} />
       <main>{renderPage()}</main>
+          <Footer currentPage={currentPage} onPageChange={setCurrentPage} />
+
     </div>
   );
 }
