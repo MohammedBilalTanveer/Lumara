@@ -28,7 +28,7 @@ export const Home = () => {
     { icon: Target, value: 50, suffix: "M+", label: "Assets Under Management" },
     { icon: TrendingUp, value: 10, suffix: "+", label: "Portfolio Companies" },
     { icon: Users, value: 100, suffix: "+", label: "Jobs Created" },
-    { icon: Award, value: 8, suffix: "", label: "Successful Exits" },
+    { icon: Award, value: 4, suffix: "", label: "Successful Exits" },
   ];
 
   const statsRef = useRef(null);
@@ -165,12 +165,10 @@ export const Home = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-semibold">Why Lumora?</h2>
+            <h2 className="text-4xl font-semibold">Why Lumara?</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              As a family office, we combine patient capital with deep
-              operational expertise to support exceptional entrepreneurs and
-              manage diversified investments that create lasting value across
-              generations.
+             Lumara Ventures is a family-backed hybrid investment fund that invests across venture capital and growth equity.
+Our mission is to back the builders of tomorrow’s India — founders, operators, and teams creating the enabling infrastructure for a modern, formalized, and digital economy.
             </p>
             <div className="space-y-4">
               {[
@@ -297,7 +295,7 @@ export const Home = () => {
               {
                 name: "Alpha.ai",
                 description: "Enterprise Family Office Fintech platform",
-                stage: "Series A",
+                stage: "Seed",
                 sector: "Enterprise Software",
                 color: "from-blue-400/10 to-blue-600/10 border-blue-300",
               },

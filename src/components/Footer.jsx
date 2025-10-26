@@ -9,9 +9,9 @@ import {
 
 export const Footer = ({ currentPage, onPageChange }) => {
   const socialLinks = [
-    { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/company/lumora' },
-    { icon: TwitterIcon, label: 'Twitter', href: 'https://twitter.com/Lumora' },
-    { icon: MailIcon, label: 'Email', href: 'mailto:hello@lumora.com' },
+    { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/company/Lumara' },
+    { icon: TwitterIcon, label: 'Twitter', href: 'https://twitter.com/Lumara' },
+    { icon: MailIcon, label: 'Email', href: 'mailto:hello@Lumara.com' },
   ];
 
   // Use same page IDs as Navigation.jsx
@@ -35,7 +35,7 @@ export const Footer = ({ currentPage, onPageChange }) => {
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
               <span className="text-primary-foreground font-semibold">L</span>
             </div>
-            <span className="text-xl font-bold">Lumora</span>
+            <span className="text-xl font-bold">Lumara</span>
           </div>
           <p className="text-sm text-muted-foreground">
             A family office partnering with exceptional entrepreneurs and managing diversified investments across private and public markets.
@@ -46,7 +46,7 @@ export const Footer = ({ currentPage, onPageChange }) => {
           </div>
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <MailIcon className="h-4 w-4" />
-            <span>hello@lumora.com</span>
+            <span>hello@Lumara.com</span>
           </div>
         </div>
 
@@ -92,7 +92,7 @@ export const Footer = ({ currentPage, onPageChange }) => {
           </div>
 
           <p className="mt-4 text-xs text-gray-500">
-            © {new Date().getFullYear()} Lumora. All rights reserved.
+            © {new Date().getFullYear()} Lumara. All rights reserved.
           </p>
         </div>
       </div>

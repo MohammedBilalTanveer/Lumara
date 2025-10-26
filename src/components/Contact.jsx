@@ -26,7 +26,7 @@ export const Contact = () => {
       icon: MailIcon,
       title: 'Email',
       description: 'Get in touch via email',
-      contact: 'hello@lumora.com',
+      contact: 'hello@lumaraventures.com',
       action: 'Send Email'
     },
     {

@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import { Home } from './components/Home';
 import { About } from './components/About';
+// import { Portfolio } from './components/Portfolio';
 import { Portfolio } from './components/Portfolio';
-import { Investment } from './components/Investment';
 import { VentureStudio } from './components/VentureStudio';
-import { News } from './components/News';
+import { Philanthropy } from './components/Philanthropy';
 import { Contact } from './components/Contact';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
@@ -25,10 +25,10 @@ export default function App() {
         return <About />;
       case 'portfolio':
         return <Portfolio />;
-      case 'investment':
-        return <Investment />;
       case 'venturestudio':
         return <VentureStudio />;
+      case 'philanthropy':
+        return <Philanthropy />;
       case 'news':
         return <News />;
       case 'contact':

@@ -11,9 +11,9 @@ export const Navigation = ({ currentPage, onPageChange }) => {
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'portfolio', label: 'Portfolio' },
-    { id: 'investment', label: 'Investment Focus' },
+    // { id: 'investment', label: 'Investment Focus' },
     { id: 'venturestudio', label: 'Venture Studio' },
-    { id: 'news', label: 'Insights' },
+    { id: 'philanthropy' , label: 'Philanthropy' },
     { id: 'contact', label: 'Contact' },
   ];
 
@@ -53,7 +53,7 @@ export const Navigation = ({ currentPage, onPageChange }) => {
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
               <span className="text-primary-foreground font-semibold">L</span>
             </div>
-            <span className="text-xl font-bold tracking-tight">Lumora</span>
+            <span className="text-xl font-bold tracking-tight">Lumara Ventures</span>
           </div>
 
           {/* Desktop Nav */}

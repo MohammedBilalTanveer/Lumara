@@ -43,35 +43,83 @@ export const VentureStudio = () => {
     return () => obs.disconnect();
   }, []);
 
+    const investmentProcess = [
+      {
+        step: "1",
+        title: "Initial Screening",
+        description:
+          "Review pitch deck and assess strategic fit with our investment thesis",
+        duration: "1-2 days",
+      },
+      {
+        step: "2",
+        title: "Founder Meeting",
+        description:
+          "Deep dive discussion with founding team about vision, market, and product",
+        duration: "1 week",
+      },
+      {
+        step: "3",
+        title: "Due Diligence",
+        description:
+          "Comprehensive analysis of business model, market opportunity, and team",
+        duration: "2-3 weeks",
+      },
+      {
+        step: "4",
+        title: "Investment Committee",
+        description:
+          "Final presentation to our investment committee for funding decision",
+        duration: "1 week",
+      },
+      {
+        step: "5",
+        title: "Term Sheet & Closing",
+        description:
+          "Negotiate terms and complete legal documentation for investment",
+        duration: "2-4 weeks",
+      },
+    ];
+
   const ventureStudioProjects = [
     {
       name: "Alpha.ai",
       description: "AI-powered family office management platform",
       stage: "In Development",
       status: "Building MVP",
-      team: "4 co-founders",
-      launch: "Q2 2024",
+      team: "2 co-founders",
+      launch: "Q2 2026",
       focus: "Fintech & AI",
       progress: 65,
     },
     {
-      name: "EcoChain",
-      description: "Blockchain-based carbon credit marketplace",
-      stage: "Early Stage",
-      status: "Market Research",
+      name: "Indulge",
+      description: "Personal Premium Concierge - At One's Fingertips",
+      stage: "Series A",
+      status: "Market Testing",
       team: "3 co-founders",
       launch: "Q4 2024",
-      focus: "CleanTech & Blockchain",
-      progress: 30,
+      focus: "Luxury Services",
+      progress: 75,
     },
     {
-      name: "HealthOS",
-      description: "Operating system for personalized healthcare management",
-      stage: "Concept",
-      status: "Team Formation",
+      name: "Das Steigen",
+      description: "EV and OEM manufacturing ecosystem in India",
+      stage: "Early Stage",
+      status: "Market Testing",
       team: "2 co-founders",
-      launch: "2025",
-      focus: "HealthTech",
+      launch: "2024",
+      focus: "EV manufacturing",
+      progress: 45,
+    },
+    {
+      name: "Tradomate",
+      description: "AI-Powered Trading Platform for Smarter Trades",
+      stage: "Pre-Series A",
+      status: "Market Testing",
+      team: "2 co-founders",
+      launch: "2024",
+      focus: "Fintech & AI",
       progress: 15,
     },
   ];
@@ -232,6 +280,62 @@ export const VentureStudio = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Investment Process */}
+      <section className="bg-muted/50">
+        <div className="container mx-auto px-4 py-16">
+          <div className="text-center space-y-4 mb-12">
+            <h2 className="text-3xl font-bold">Investment Process</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Our streamlined investment process is designed to move quickly while
+              conducting thorough due diligence.
+            </p>
+          </div>
+
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="show"
+            variants={fadeUp}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <div className="relative">
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
+              <div className="space-y-8">
+                {investmentProcess.map((step, index) => (
+                  <motion.div
+                    key={index}
+                    initial="hidden"
+                    whileInView="show"
+                    variants={fadeUp}
+                    className="relative flex items-start space-x-6"
+                    viewport={{ once: true, amount: 0.2 }}
+                  >
+                    <div className="flex-shrink-0 w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xl z-10">
+                      {step.step}
+                    </div>
+                    <Card className="rounded-3xl shadow-lg border-none bg-gradient-to-br from-white/5 to-background backdrop-blur hover:shadow-2xl transition-all duration-400 flex-1">
+                      <CardHeader>
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="text-xl font-semibold">
+                            {step.title}
+                          </CardTitle>
+                          <Badge variant="outline">
+                            {step.duration}
+                          </Badge>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">{step.description}</p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
           {/* ENHANCED STUDIO ADVANTAGES */}
           <Card className="rounded-3xl bg-gradient-to-br from-primary/10 via-background/60 to-primary/5 border-none mt-16">
