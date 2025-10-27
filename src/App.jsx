@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Home } from './components/Home';
 import { About } from './components/About';
-// import { Portfolio } from './components/Portfolio';
 import { Portfolio } from './components/Portfolio';
 import { VentureStudio } from './components/VentureStudio';
 import { Philanthropy } from './components/Philanthropy';

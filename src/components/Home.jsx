@@ -13,6 +13,7 @@ import {
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { ArrowRight, Target, TrendingUp, Users, Award } from "lucide-react";
+
 export const Home = () => {
   const fadeUp = {
     hidden: { opacity: 0, y: 30, scale: 0.98, willChange: "transform" },
@@ -65,17 +66,18 @@ export const Home = () => {
               </h1>
 
               <p className="text-xl text-primary-foreground/90 max-w-lg">
-                A family office partnering with exceptional entrepreneurs and
-                managing diversified investments across private and public
-                markets.
+                {/* UPDATED: Name changed to Lumara */}
+                Lumara is a family office partnering with exceptional
+                entrepreneurs and managing diversified investments across
+                private and public markets.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-
                 <Button
                   size="lg"
                   variant="secondary"
                   className="group hover:scale-105 transition-all"
+                  onClick={() => (window.location.href = "/portfolio")}
                 >
                   Our Portfolio
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -84,6 +86,7 @@ export const Home = () => {
                   size="lg"
                   variant="outline"
                   className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary hover:scale-105 transition-all"
+                  onClick={() => (window.location.href = "/thesis")}
                 >
                   Investment Thesis
                 </Button>
@@ -143,7 +146,6 @@ export const Home = () => {
         </motion.div>
       </section>
 
-
       {/* ABOUT SECTION */}
       <section className="bg-muted/50 py-24">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
@@ -165,10 +167,14 @@ export const Home = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
+            {/* UPDATED: Name changed to Lumara */}
             <h2 className="text-4xl font-semibold">Why Lumara?</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-             Lumara Ventures is a family-backed hybrid investment fund that invests across venture capital and growth equity.
-Our mission is to back the builders of tomorrow’s India — founders, operators, and teams creating the enabling infrastructure for a modern, formalized, and digital economy.
+              Lumara is a family-backed hybrid investment fund that
+              invests across venture capital and growth equity. Our mission is
+              to back the builders of tomorrow’s India — founders, operators,
+              and teams creating the enabling infrastructure for a modern,
+              formalized, and digital economy.
             </p>
             <div className="space-y-4">
               {[
@@ -217,13 +223,14 @@ Our mission is to back the builders of tomorrow’s India — founders, operator
         </motion.div>
 
         <motion.div
+          // UPDATED: Grid changed to md:grid-cols-3 to accommodate 5 items
           className="grid md:grid-cols-3 gap-10"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           variants={{
             hidden: {},
-            show: { transition: { staggerChildren: 0.15 } },
+            show: { transition: { staggerChildren: 0.1 } }, // faster stagger
           }}
         >
           {[
@@ -245,6 +252,19 @@ Our mission is to back the builders of tomorrow’s India — founders, operator
                 "Innovations in EV manufacturing, batteries, and mobility tech.",
               gradient: "from-purple-500/10 to-purple-500/5 border-purple-200",
             },
+            {
+              title: "Healthcare & Biotech",
+              description:
+                "Pioneering solutions in healthcare, diagnostics, and biotech innovation.",
+              gradient: "from-red-500/10 to-red-500/5 border-red-200",
+            },
+            // ADDED: 5th placeholder box as requested
+            {
+              title: "New Focus Area",
+              description:
+                "Describe the new investment focus area here.",
+              gradient: "from-gray-500/10 to-gray-500/5 border-gray-200",
+            },
           ].map((focus, i) => (
             <motion.div key={i} variants={fadeUp}>
               <Card
@@ -265,6 +285,7 @@ Our mission is to back the builders of tomorrow’s India — founders, operator
       </section>
 
       {/* PORTFOLIO HIGHLIGHTS SECTION */}
+      {/* This section already matches your requirements */}
       <section className="bg-muted/50 py-24">
         <div className="container mx-auto px-4">
           <motion.div
@@ -293,25 +314,39 @@ Our mission is to back the builders of tomorrow’s India — founders, operator
           >
             {[
               {
-                name: "Alpha.ai",
-                description: "Enterprise Family Office Fintech platform",
-                stage: "Seed",
-                sector: "Enterprise Software",
+                name: "NSE",
+                description: "India’s leading stock exchange and financial ecosystem",
+                stage: "Established",
+                sector: "Capital Markets",
                 color: "from-blue-400/10 to-blue-600/10 border-blue-300",
               },
               {
-                name: "Das Steign",
-                description: "EV component manufacturing start-up",
-                stage: "Seed",
-                sector: "EV Tech",
-                color: "from-purple-400/10 to-purple-600/10 border-purple-300",
+                name: "Anand Rathi",
+                description: "Wealth management and financial advisory powerhouse",
+                stage: "Growth",
+                sector: "Financial Services",
+                color: "from-green-400/10 to-green-600/10 border-green-300",
               },
               {
-                name: "SPS Bank",
-                description: "Next-generation payment processing",
-                stage: "Series A",
+                name: "Tradomate",
+                description: "AI-powered trading platform for smarter trades",
+                stage: "Pre-Series A",
                 sector: "Fintech",
-                color: "from-green-400/10 to-green-600/10 border-green-300",
+                color: "from-amber-400/10 to-amber-600/10 border-amber-300",
+              },
+              {
+                name: "Indulge",
+                description: "Premium lifestyle concierge and experience platform",
+                stage: "Series A",
+                sector: "Luxury Services",
+                color: "from-pink-400/10 to-pink-600/10 border-pink-300",
+              },
+              {
+                name: "Das Steign",
+                description: "EV and OEM manufacturing ecosystem in India",
+                stage: "Early Stage",
+                sector: "EV Manufacturing",
+                color: "from-purple-400/10 to-purple-600/10 border-purple-300",
               },
             ].map((company, i) => (
               <motion.div key={i} variants={fadeUp}>
@@ -347,6 +382,7 @@ Our mission is to back the builders of tomorrow’s India — founders, operator
       </section>
 
       {/* CTA SECTION */}
+      {/* This section's links are already working */}
       <motion.section
         className="container mx-auto px-4 pt-12 pb-12"
         initial="hidden"
@@ -365,6 +401,7 @@ Our mission is to back the builders of tomorrow’s India — founders, operator
                 size="lg"
                 variant="secondary"
                 className="px-8 hover:scale-105 transition-transform"
+                onClick={() => (window.location.href = "/pitch")}
               >
                 Submit Your Pitch
               </Button>
@@ -372,6 +409,7 @@ Our mission is to back the builders of tomorrow’s India — founders, operator
                 size="lg"
                 variant="outline"
                 className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary hover:scale-105 transition-transform"
+                onClick={() => (window.location.href = "/contact")}
               >
                 Get in Touch
               </Button>

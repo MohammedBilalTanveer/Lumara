@@ -1,4 +1,7 @@
+// src/components/About.jsx
+
 import React from "react";
+import { motion } from "framer-motion";
 import {
   Card,
   CardContent,
@@ -24,66 +27,38 @@ import {
   TrophyIcon,
 } from "lucide-react";
 
+/* Animation variants (from portfolio.jsx) */
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
 export const About = () => {
+  // Updated "crisp" experience data
   const experiences = [
     {
       period: "2019 - Present",
       role: "Founder and Partner",
-      company: "Investment Fund",
+      company: "Lumara Ventures", // Updated as requested
       location: "Bangalore, Karnataka",
-      description:
-        "$12M venture and growth equity fund investing in infrastructure providers driving India's modernization",
-      highlights: [
-        {
-          title: "Success Stories:",
-          items: [
-            "National Stock Exchange: invested during pandemic; delivered 10.5x returns in 5 years",
-            "Anand Rathi Wealth: early stage bet on wealth management; delivered 37.7x returns in 8 years (IPO)",
-          ],
-        },
-        {
-          title: "Early-stage portfolio company experience:",
-          items: [
-            "Indulge (luxury concierge service): Architected a pricing strategy with 50% margin; pivoted to WhatsApp only operational model and increased engagement by 5x, negotiated zero-cost partnerships with communities such as YPO and EO; and expanded into a 50+ HNI category with a strategic hire",
-            "Das Steigen (EV Components manufacturer): reduced 3-d printing material costs by up to 90%; cut adoption cycles to less than 6 months and inputs costs for OEMs by 40%; negotiated a contract for neodymium magnets after China's export ban; and expanded TAM by $40Mn by venturing into drone motors and achieved a working prototype",
-          ],
-        },
-      ],
+      icon: BriefcaseIcon,
+      sector: "Investment", // Added new field
     },
     {
       period: "2020 - Present",
       role: "Partner and CIO",
       company: "Family Office",
       location: "Bangalore, Karnataka",
-      description: "$60M investment vehicle for the family",
-      highlights: [
-        {
-          items: [
-            "Professionalized the $30 million family portfolio via a tax efficient entity, governance frameworks and investment policy scheme and scaled it to $60 million in 5 years",
-            "Structured family philanthropy in healthcare and education, deploying over $1 million every year to benefit over 6000 people through scholarships, school infrastructure and health camps",
-            "Led the family portfolio strategic shift from Debt/Real Estate to Public and Private markets, delivering returns at 18% CAGR since inception",
-            "Built venture studio for early-stage start-ups, providing GTM, hiring, and fundraising support and driving revenue growth and customer bases across portfolio",
-          ],
-        },
-      ],
+      icon: BriefcaseIcon,
+      sector: "Wealth Management", // Added new field
     },
     {
       period: "2015 - Present",
       role: "Strategy and Business Development",
       company: "VESCO",
       location: "Bangalore, Karnataka",
-      description: "$100 million family-owned mining business",
-      highlights: [
-        {
-          items: [
-            "Negotiated an exclusive supply contract for low-grade iron ore, securing 15-20% more than the market price and boosting revenues by 10% annually",
-            "Developed screening solution to produce high-tumbler index for sponge iron plant, fetching 25% premium over the marker prices and boosting revenue by more than 12%",
-            "Found a solution to convert ultra low-grade iron ore into high-grade via beneficiation partnership, doubling income and driving 15% y-o-y growth",
-            "Led a large-scale environmental remediation program to cut down AQI, improving water quality and restoring ground water",
-            "Secured renewal of 46-acre mining lease, unlocking 0.55 MMT of production capacity and employment for 80+ skilled and unskilled workers",
-          ],
-        },
-      ],
+      icon: BriefcaseIcon,
+      sector: "Mining", // Added new field
     },
   ];
 
@@ -128,39 +103,62 @@ export const About = () => {
   ];
 
   return (
-    <div className="space-y-16 py-8">
-      {/* Hero Section */}
-      <section className="container mx-auto px-4">
-        <div className="text-center space-y-4 mb-16">
-          <h1 className="text-4xl lg:text-5xl">About Lumora</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+    <div className="space-y-24 overflow-hidden">
+      {/* Hero Section (Styled like portfolio.jsx) */}
+      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[60vh] flex items-center justify-center text-center">
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={fadeUp}
+          className="max-w-3xl mx-auto px-4"
+        >
+          <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">
+            About Lumora
+          </h1>
+          <p className="text-xl text-primary-foreground/90 leading-relaxed">
             A family office dedicated to partnering with exceptional
             entrepreneurs and managing diversified investments across private
             and public markets with a focus on long-term value creation.
           </p>
-        </div>
+        </motion.div>
       </section>
 
+      {/* Stats / Fund Overview Section REMOVED as per request */}
+
       {/* Nikhil's Profile */}
-      <section className="container mx-auto px-4">
+      <motion.section
+        className="container mx-auto px-4"
+        initial="hidden"
+        whileInView="show"
+        variants={fadeUp}
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="grid lg:grid-cols-2 gap-16 items-start">
-          <div className="space-y-6">
-            <div className="relative">
+          <motion.div
+            className="space-y-6"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.35 }}
+          >
+            <div className="relative rounded-3xl shadow-lg overflow-hidden">
               <ImageWithFallback
-               src={Nikhil}
+                src={Nikhil}
                 alt="Nikhil K S - Founder of Lumora"
-                className="rounded-lg w-full h-auto object-cover"
+                className="rounded-3xl w-full h-auto object-cover"
               />
-              <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground p-4 rounded-lg">
+              <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground p-4 rounded-lg shadow-xl">
                 <AwardIcon className="h-6 w-6" />
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="space-y-8">
+          <motion.div
+            className="space-y-8"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.35 }}
+          >
             <div>
               <h2 className="text-3xl mb-2">Nikhil K S</h2>
-              <p className="text-xl text-muted-foreground mb-4">
+              <p className="text-xl text-primary mb-4">
                 Founder & Managing Partner
               </p>
               <div className="flex items-center space-x-4 text-muted-foreground mb-6">
@@ -169,17 +167,25 @@ export const About = () => {
                   <span>Bangalore, Karnataka</span>
                 </div>
                 <div className="flex space-x-2">
-                  <LinkedinIcon className="h-4 w-4 cursor-pointer hover:text-primary" />
+                  <a
+                    href="https://www.linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <LinkedinIcon className="h-5 w-5 cursor-pointer hover:text-primary" />
+                  </a>
                 </div>
               </div>
             </div>
 
             <div className="space-y-4">
-              <p className="text-lg">
+              <p className="text-lg leading-relaxed text-muted-foreground">
                 Nikhil K S founded Lumora with a singular mission: to build a
                 family office that combines strategic capital deployment with
                 deep operational expertise to create lasting value across
                 generations.
+              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground">
                 With expertise spanning venture capital, family office
                 management, and operational leadership in mining and financial
                 services, Nikhil brings a unique blend of investment acumen and
@@ -188,302 +194,368 @@ export const About = () => {
                 National Stock Exchange (10.5x returns).
               </p>
             </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <Card>
-                <CardContent className="pt-6 text-center">
-                  <TrendingUpIcon className="h-8 w-8 mx-auto mb-2 text-primary" />
-                  <div className="text-2xl mb-1">$60M</div>
-                  <p className="text-sm text-muted-foreground">AUM (Family Office)</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-6 text-center">
-                  <BarChart3Icon className="h-8 w-8 mx-auto mb-2 text-primary" />
-                  <div className="text-2xl mb-1">18%</div>
-                  <p className="text-sm text-muted-foreground">CAGR Since Inception</p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Professional Experience */}
-      <section className="bg-muted/50">
+      {/* Professional Experience (Styled like portfolio.jsx tab content) */}
+      <motion.section
+        className="bg-muted/50"
+        initial="hidden"
+        whileInView="show"
+        variants={fadeUp}
+        viewport={{ once: true, amount: 0.1 }}
+      >
         <div className="container mx-auto px-4 py-16">
-          <h2 className="text-3xl text-center mb-12">Professional Experience</h2>
+          <h2 className="text-3xl text-center mb-12 font-bold">
+            Professional Experience
+          </h2>
 
-          <div className="max-w-5xl mx-auto space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* UPDATED to be crisp */}
             {experiences.map((experience, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    <div>
-                      <CardTitle className="text-xl">{experience.role}</CardTitle>
-                      <CardDescription className="text-base">
-                        {experience.company} • {experience.location}
-                      </CardDescription>
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.35 }}
+              >
+                <Card className="p-5 rounded-3xl shadow-lg border-none bg-gradient-to-br from-white/5 to-background backdrop-blur hover:shadow-2xl transition-all duration-400">
+                  <CardHeader className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                          <experience.icon className="h-6 w-6 text-primary" />
+                        </div>
+                        <CardTitle className="text-xl font-semibold">
+                          {experience.role}
+                        </CardTitle>
+                      </div>
+                      <Badge variant="secondary">{experience.period}</Badge>
                     </div>
-                    <Badge variant="outline" className="w-fit">
-                      {experience.period}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <p className="text-muted-foreground">{experience.description}</p>
-                  {experience.highlights.map((highlight, idx) => (
-                    <div key={idx} className="space-y-3">
-                      {highlight.title && (
-                        <h4 className="text-sm">{highlight.title}</h4>
-                      )}
-                      <ul className="space-y-2">
-                        {highlight.items.map((item, itemIdx) => (
-                          <li
-                            key={itemIdx}
-                            className="flex items-start space-x-2 text-sm text-muted-foreground"
-                          >
-                            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                    <CardDescription className="text-base">
+                      {experience.company} • {experience.location}
+                    </CardDescription>
+                    <div className="pt-2">
+                      <Badge variant="outline">{experience.sector}</Badge>
                     </div>
-                  ))}
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                  {/* CardContent removed for crispness */}
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Board Experience */}
-      <section className="container mx-auto px-4">
-        <h2 className="text-3xl text-center mb-12">Board Experience</h2>
+      {/* Board Experience (Styled as a single portfolio card) */}
+      <motion.section
+        className="container mx-auto px-4"
+        initial="hidden"
+        whileInView="show"
+        variants={fadeUp}
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <h2 className="text-3xl text-center mb-12 font-bold">
+          Board Experience
+        </h2>
 
-        <div className="max-w-4xl mx-auto">
-          <Card className="bg-primary/5 border-primary/20">
+        <motion.div
+          className="max-w-4xl mx-auto"
+          whileHover={{ scale: 1.03 }}
+          transition={{ duration: 0.35 }}
+        >
+          <Card className="rounded-3xl shadow-lg border-none bg-gradient-to-br from-white/5 to-background backdrop-blur hover:shadow-2xl transition-all duration-400">
             <CardHeader>
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                  <CardTitle className="text-xl flex items-center gap-2">
-                    <BuildingIcon className="h-5 w-5 text-primary" />
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <BuildingIcon className="h-6 w-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-xl font-semibold">
                     {boardExperience.role}
                   </CardTitle>
-                  <CardDescription className="text-base">
-                    {boardExperience.company} • {boardExperience.location}
-                  </CardDescription>
                 </div>
-                <Badge variant="outline" className="w-fit">
+                <Badge variant="secondary" className="w-fit">
                   {boardExperience.period}
                 </Badge>
               </div>
+              <CardDescription className="text-base pt-2">
+                {boardExperience.company} • {boardExperience.location}
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground">
                 {boardExperience.description}
               </p>
               <div>
-                <h4 className="text-sm mb-3">Key Achievements:</h4>
-                <ul className="space-y-2">
+                <h4 className="text-sm font-semibold text-primary mb-3">
+                  Key Achievements:
+                </h4>
+                <ul className="space-y-2 list-disc list-inside">
                   {boardExperience.achievements.map((achievement, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start space-x-2 text-sm text-muted-foreground"
+                      className="text-sm text-muted-foreground"
                     >
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                      <span>{achievement}</span>
+                      {achievement}
                     </li>
                   ))}
                 </ul>
               </div>
             </CardContent>
           </Card>
-        </div>
-      </section>
-
-      {/* Education */}
-      <section className="bg-muted/50">
+        </motion.div>
+      </motion.section>
+      {/* Education (Styled like portfolio.jsx tab content) */}
+      <motion.section
+        className="bg-muted/50"
+        initial="hidden"
+        whileInView="show"
+        variants={fadeUp}
+        viewport={{ once: true, amount: 0.1 }}
+      >
         <div className="container mx-auto px-4 py-16">
-          <h2 className="text-3xl text-center mb-12 flex items-center justify-center">
-            <GraduationCapIcon className="h-8 w-8 mr-3 text-primary" />
+          <h2 className="text-3xl text-center mb-12 font-bold flex items-center justify-center gap-3">
+            <GraduationCapIcon className="h-8 w-8 text-primary" />
             Education
           </h2>
 
-          <div className="max-w-4xl mx-auto space-y-6">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {education.map((edu, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    <div>
-                      <CardTitle className="text-xl">{edu.degree}</CardTitle>
-                      <CardDescription className="text-base">
-                        {edu.school} • {edu.location}
-                      </CardDescription>
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.35 }}
+              >
+                <Card className="rounded-3xl shadow-lg border-none bg-gradient-to-br from-white/5 to-background backdrop-blur hover:shadow-2xl transition-all duration-400 h-full">
+                  <CardHeader>
+                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                      <div>
+                        <CardTitle className="text-xl font-semibold">
+                          {edu.degree}
+                        </CardTitle>
+                        <CardDescription className="text-base">
+                          {edu.school} • {edu.location}
+                        </CardDescription>
+                      </div>
+                      <div className="flex flex-col items-start md:items-end gap-2 flex-shrink-0">
+                        <Badge variant="secondary">{edu.period}</Badge>
+                        <Badge variant="outline">GPA: {edu.gpa}</Badge>
+                      </div>
                     </div>
-                    <div className="flex flex-col items-start md:items-end gap-2">
-                      <Badge variant="outline">{edu.period}</Badge>
-                      <Badge variant="secondary">GPA: {edu.gpa}</Badge>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {edu.honors && (
-                    <div>
-                      <h4 className="text-sm mb-2">Honors & Recognition:</h4>
-                      <ul className="space-y-1">
-                        {edu.honors.map((honor, idx) => (
-                          <li
-                            key={idx}
-                            className="flex items-start space-x-2 text-sm text-muted-foreground"
-                          >
-                            <TrophyIcon className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                            <span>{honor}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {edu.activities && (
-                    <div>
-                      <h4 className="text-sm mb-2">Activities:</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {edu.activities}
-                      </p>
-                    </div>
-                  )}
-                  {edu.thesis && (
-                    <div>
-                      <h4 className="text-sm mb-2">Thesis:</h4>
-                      <p className="text-sm text-muted-foreground">{edu.thesis}</p>
-                    </div>
-                  )}
-                  {edu.internship && (
-                    <div>
-                      <h4 className="text-sm mb-2">Internship:</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {edu.internship}
-                      </p>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {edu.honors && (
+                      <div>
+                        <h4 className="text-sm font-semibold text-primary mb-2">
+                          Honors & Recognition:
+                        </h4>
+                        <ul className="space-y-1">
+                          {edu.honors.map((honor, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start space-x-2 text-sm text-muted-foreground"
+                            >
+                              <TrophyIcon className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                              <span>{honor}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {edu.activities && (
+                      <div>
+                        <h4 className="text-sm font-semibold text-primary mb-2">
+                          Activities:
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          {edu.activities}
+                        </p>
+                      </div>
+                    )}
+                    {edu.thesis && (
+                      <div>
+                        <h4 className="text-sm font-semibold text-primary mb-2">
+                          Thesis:
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          {edu.thesis}
+                        </p>
+                      </div>
+                    )}
+                    {edu.internship && (
+                      <div>
+                        <h4 className="text-sm font-semibold text-primary mb-2">
+                          Internship:
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          {edu.internship}
+                        </p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Additional Information */}
-      <section className="container mx-auto px-4">
-        <h2 className="text-3xl text-center mb-12">Additional</h2>
+      {/* Additional Information (Styled like portfolio.jsx criteria section) */}
+      <motion.section
+        className="container mx-auto px-4"
+        initial="hidden"
+        whileInView="show"
+        variants={fadeUp}
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <h2 className="text-3xl text-center mb-12 font-bold">Additional</h2>
 
-        <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
-                <HeartIcon className="h-5 w-5 text-primary" />
-                Community Leadership
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Working with doctors, a regional hospital, and a healthcare
-                startup to design scalable models for emergency care delivery
-              </p>
-            </CardContent>
-          </Card>
+        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 items-stretch">
+          <motion.div
+            whileHover={{ scale: 1.04 }}
+            transition={{ duration: 0.35 }}
+            className="h-full"
+          >
+            <Card className="h-full flex flex-col rounded-3xl border-none shadow-md hover:shadow-xl bg-gradient-to-br from-rose-50 to-rose-100 transition-all duration-400">
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <HeartIcon className="h-5 w-5 text-primary" />
+                  Community Leadership
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-sm text-muted-foreground">
+                  Working with doctors, a regional hospital, and a healthcare
+                  startup to design scalable models for emergency care delivery
+                </p>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
-                <GlobeIcon className="h-5 w-5 text-primary" />
-                Languages
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-center justify-between">
-                  <span>Kannada</span>
-                  <Badge variant="secondary" className="text-xs">
-                    Native
-                  </Badge>
+          <motion.div
+            whileHover={{ scale: 1.04 }}
+            transition={{ duration: 0.35 }}
+            className="h-full"
+          >
+            <Card className="h-full flex flex-col rounded-3xl border-none shadow-md hover:shadow-xl bg-gradient-to-br from-blue-50 to-blue-100 transition-all duration-400">
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <GlobeIcon className="h-5 w-5 text-primary" />
+                  Languages
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="flex items-center justify-between">
+                    <span>Kannada</span>
+                    <Badge variant="secondary" className="text-xs">
+                      Native
+                    </Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Hindi</span>
+                    <Badge variant="secondary" className="text-xs">
+                      Fluent
+                    </Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Spanish</span>
+                    <Badge variant="secondary" className="text-xs">
+                      Beginner
+                    </Badge>
+                  </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span>Hindi</span>
-                  <Badge variant="secondary" className="text-xs">
-                    Fluent
-                  </Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>Spanish</span>
-                  <Badge variant="secondary" className="text-xs">
-                    Beginner
-                  </Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
-                <UsersIcon className="h-5 w-5 text-primary" />
-                Interests
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Avid tennis and poker enthusiast, pursuing both as lifelong
-                passions that reflect strategy and love for learning
-              </p>
-            </CardContent>
-          </Card>
+          <motion.div
+            whileHover={{ scale: 1.04 }}
+            transition={{ duration: 0.35 }}
+            className="h-full"
+          >
+            <Card className="h-full flex flex-col rounded-3xl border-none shadow-md hover:shadow-xl bg-gradient-to-br from-green-50 to-green-100 transition-all duration-400">
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <UsersIcon className="h-5 w-5 text-primary" />
+                  Interests
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-sm text-muted-foreground">
+                  Avid tennis and poker enthusiast, pursuing both as lifelong
+                  passions that reflect strategy and love for learning
+                </p>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Investment Philosophy */}
-      <section className="bg-muted/50">
-        <div className="container mx-auto px-4 py-16">
+      {/* Investment Philosophy (Styled like portfolio.jsx criteria section) */}
+      <motion.section
+        className="bg-muted/50"
+        initial="hidden"
+        whileInView="show"
+        variants={fadeUp}
+        viewport={{ once: true, amount: 0.1 }}
+      >
+        <div className="container mx-auto px-4 py-20">
           <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h2 className="text-3xl">Investment Philosophy</h2>
+            <h2 className="text-3xl font-bold">Investment Philosophy</h2>
             <blockquote className="text-2xl italic text-muted-foreground">
               "True wealth is measured not by what we accumulate, but by the
               positive impact we create in society and the lasting value we
               build across generations."
             </blockquote>
-            <div className="grid md:grid-cols-3 gap-8 mt-12">
+            <div className="grid md:grid-cols-3 gap-8 mt-12 items-stretch">
               {[
                 {
                   principle: "Operational Value-Add",
                   description:
                     "Hands-on support in pricing, GTM strategy, hiring, and operational excellence to drive portfolio growth.",
+                  gradient: "from-purple-50 to-purple-100",
                 },
                 {
                   principle: "Patient Capital",
                   description:
                     "Long-term partnership approach with focus on sustainable growth and 18%+ CAGR returns.",
+                  gradient: "from-yellow-50 to-yellow-100",
                 },
                 {
                   principle: "Impact-Driven",
                   description:
                     "Combining financial returns with social impact through structured philanthropy and community development.",
+                  gradient: "from-indigo-50 to-indigo-100",
                 },
               ].map((item, index) => (
-                <Card key={index}>
-                  <CardHeader>
-                    <CardTitle className="text-lg">{item.principle}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.04 }}
+                  transition={{ duration: 0.35 }}
+                  className="h-full"
+                >
+                  <Card
+                    className={`h-full flex flex-col rounded-3xl border-none shadow-md hover:shadow-xl bg-gradient-to-br ${item.gradient} transition-all duration-400`}
+                  >
+                    <CardHeader>
+                      <CardTitle className="text-lg">{item.principle}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-grow">
+                      <p className="text-sm text-muted-foreground">
+                        {item.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };
+
+export default About;
