@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import PitchModal from "./PitchModal";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
@@ -29,80 +30,124 @@ import {
   DollarSign,
   Calendar,
 } from "lucide-react";
-
+import Tradomate from "../assets/companies/tradomate.jpg";
+import Indulge from "../assets/companies/indulge.png";
+import DasSteign from "../assets/companies/das.png";
+import MetaMan from "../assets/companies/metaman.png";
+import NSE from "../assets/companies/nse.png";
+import AnandRathi from "../assets/companies/anandrathe.jpg";
+import SparkCapital from "../assets/companies/sparkcapital.png";
+import Settlin from "../assets/companies/settlin.png";
+import AtiMotos from "../assets/companies/ati.jpg";
+import Fynn from "../assets/companies/fynn.png";
+import OtoCapital from "../assets/companies/oto.avif";
+import T9L from "../assets/companies/t9l.jpg";
 /* Animation variants */
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-export const Portfolio = () => {
-  // Private Market Investment Focus
-  const privateMarketFocus = [
-    {
-      sector: "Enterprise Software",
-      description:
-        "B2B SaaS solutions that transform how businesses operate, collaborate, and scale",
-      allocation: 35,
-      icon: BuildingIcon,
-      examples: [
-        "CRM & Sales Tools",
-        "Workflow Automation",
-        "Data Analytics",
-        "Developer Tools",
-      ],
-      recentInvestments: ["CloudSync Pro", "DevTools Pro", "DataVault"],
-      investment_range: "$500K - $3M",
-      stage: "Seed to Series A",
-    },
-    {
-      sector: "Fintech",
-      description:
-        "Financial services technology revolutionizing payments, lending, and wealth management",
-      allocation: 30,
-      icon: DollarSignIcon,
-      examples: [
-        "Payment Processing",
-        "Digital Banking",
-        "Investment Platforms",
-        "InsurTech",
-      ],
-      recentInvestments: ["PayFlow", "CryptoWallet Pro"],
-      investment_range: "$750K - $5M",
-      stage: "Seed to Series A",
-    },
-    {
-      sector: "EV & CleanTech",
-      description: "Electric vehicle technology and sustainable energy solutions",
-      allocation: 20,
-      icon: LeafIcon,
-      examples: [
-        "EV Manufacturing",
-        "Battery Technology",
-        "Charging Infrastructure",
-        "Energy Storage",
-      ],
-      recentInvestments: ["Das Steign", "GreenEnergy Analytics"],
-      investment_range: "$1M - $4M",
-      stage: "Seed to Series A",
-    },
-    {
-      sector: "HealthTech",
-      description:
-        "Digital health solutions improving patient outcomes and healthcare delivery",
-      allocation: 15,
-      icon: HeartIcon,
-      examples: [
-        "Telemedicine",
-        "Health Analytics",
-        "Medical Devices",
-        "Mental Health",
-      ],
-      recentInvestments: ["HealthLink", "MindCare AI"],
-      investment_range: "$500K - $2.5M",
-      stage: "Seed to Series A",
-    },
-  ];
+export const Portfolio = ({ onPageChange }) => {
+const [showPitchModal, setShowPitchModal] = useState(false);
+const privateCompanies = [
+  {
+    name: "Tradomate",
+    image: Tradomate,
+    tagline: "Empowering smart trading decisions.",
+    sector: "Trading Fintech",
+    description:
+      "Tradomate delivers next-gen AI-powered trading tools and analytics for retail and institutional investors.",
+  },
+  {
+    name: "Indulge",
+    image: Indulge,
+    tagline: "Luxury at your fingertips.",
+    sector: "Luxury Concierge",
+    description:
+      "Indulge curates premium lifestyle experiences, offering personalized luxury concierge services globally.",
+  },
+  {
+    name: "Das Steign",
+    image: DasSteign,
+    tagline: "Driving the EV revolution.",
+    sector: "EV Components",
+    description:
+      "Das Steign specializes in high-performance EV drivetrain components, enhancing energy efficiency and reliability.",
+  },
+  {
+    name: "Meta Man",
+    image: MetaMan,
+    tagline: "Redefining modern jewelry for men.",
+    sector: "Jewelry",
+    description:
+      "Meta Man blends craftsmanship and innovation to create premium, tech-inspired jewelry for modern men.",
+  },
+  {
+    name: "NSE",
+    image: NSE,
+    tagline: "India’s leading stock exchange.",
+    sector: "Stock Exchange",
+    description:
+      "The National Stock Exchange pioneers financial innovation, providing a transparent and efficient trading platform.",
+  },
+  {
+    name: "Anand Rathi",
+    image: AnandRathi,
+    tagline: "Trusted wealth management partner.",
+    sector: "Wealth Management",
+    description:
+      "Anand Rathi offers comprehensive financial advisory, wealth creation, and portfolio management solutions.",
+  },
+  {
+    name: "Spark Capital",
+    image: SparkCapital,
+    tagline: "Igniting growth through strategy.",
+    sector: "Asset Management",
+    description:
+      "Spark Capital partners with businesses to provide strategic capital solutions and advisory expertise.",
+  },
+  {
+    name: "Settlin",
+    image: Settlin,
+    tagline: "Simplifying real estate buying.",
+    sector: "Real Estate Tech",
+    description:
+      "Settlin revolutionizes property transactions through verified listings, AI-driven recommendations, and transparency.",
+  },
+  {
+    name: "Ati Motos",
+    image: AtiMotos,
+    tagline: "Automating tomorrow’s warehouses.",
+    sector: "Warehouse Automation",
+    description:
+      "Ati Motos builds intelligent robots and automation systems for seamless warehouse operations and logistics.",
+  },
+  {
+    name: "Fynn",
+    image: Fynn,
+    tagline: "Delivering the last mile efficiently.",
+    sector: "Last Mile Logistics",
+    description:
+      "Fynn optimizes last-mile delivery networks with smart routing, real-time tracking, and carbon efficiency.",
+  },
+  {
+    name: "Oto Capital",
+    image: OtoCapital,
+    tagline: "Making EV ownership effortless.",
+    sector: "EV Financing",
+    description:
+      "Oto Capital offers flexible financing and subscription plans for EV two-wheelers, driving green adoption.",
+  },
+  {
+    name: "T9L",
+    image: T9L,
+    tagline: "Building the next wave of startups.",
+    sector: "Venture Builder",
+    description:
+      "T9L accelerates startup success with end-to-end venture building, from concept validation to market scaling.",
+  },
+];
 
   // Public Market Investment Focus
   const publicMarketFocus = [
@@ -166,8 +211,8 @@ export const Portfolio = () => {
 
   // Stats data for overview
   const stats = [
-    { label: "Assets Under Management", end: 100, suffix: "M+" },
-    { label: "Portfolio Companies & Positions", end: 40, suffix: "+" },
+    { label: "Assets Under Management", end: 50, suffix: "M+" },
+    { label: "Portfolio Companies & Positions", end: 10, suffix: "+" },
     { label: "Limited Partners & Co-Investors", end: 15, suffix: "+" },
   ];
 
@@ -193,7 +238,7 @@ export const Portfolio = () => {
   return (
     <div className="space-y-24 overflow-hidden">
       {/* HERO Section */}
-      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[60vh] flex items-center justify-center text-center">
+      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[45vh] flex items-center justify-center text-center">
         <motion.div
           initial="hidden"
           animate="show"
@@ -258,134 +303,48 @@ export const Portfolio = () => {
           </TabsList>
 
           {/* Private Market */}
-          <TabsContent value="private" className="space-y-12">
-            <div className="text-center space-y-4 mb-8">
-              <h2 className="text-3xl font-bold">Private Market Investments</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Early-stage venture investments in exceptional founders building
-                transformative companies across key technology sectors.
-              </p>
-            </div>
+<TabsContent value="private" className="space-y-8">
+  <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
+    {privateCompanies.map((company, i) => (
+      <motion.div
+        key={i}
+        className="group [perspective:1000px] w-[340px] h-[220px]"
+        whileHover={{ scale: 1.04 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="relative w-full h-full text-center transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+          {/* FRONT (White Side) */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-white rounded-2xl shadow-xl border border-gray-200 [backface-visibility:hidden] overflow-hidden">
+            <img
+              src={company.image}
+              alt={company.name}
+              className="object-contain w-28 h-28 mb-3"
+            />
+            <h3 className="text-lg font-semibold text-gray-800">
+              {company.name}
+            </h3>
+          </div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
-              {privateMarketFocus.map((sector, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.35 }}
-                >
-                  <Card className="rounded-3xl shadow-lg border-none bg-gradient-to-br from-white/5 to-background backdrop-blur hover:shadow-2xl transition-all duration-400">
-                    <CardHeader className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="p-2 bg-primary/10 rounded-lg">
-                            <sector.icon className="h-6 w-6 text-primary" />
-                          </div>
-                          <CardTitle className="text-xl font-semibold">
-                            {sector.sector}
-                          </CardTitle>
-                        </div>
-                        <Badge variant="secondary">
-                          {sector.allocation}% allocation
-                        </Badge>
-                      </div>
-                      <CardDescription className="text-base">
-                        {sector.description}
-                      </CardDescription>
-                    </CardHeader>
+          {/* BACK (Black Side) */}
+          <div className="absolute inset-0 bg-black text-white rounded-2xl p-6 flex flex-col justify-center items-center [transform:rotateY(180deg)] [backface-visibility:hidden] shadow-xl border border-gray-800">
+            <h3 className="text-lg font-bold mb-1">{company.name}</h3>
+            <p className="text-sm text-gray-300 mb-1 italic">
+              {company.tagline}
+            </p>
+            <p className="text-xs uppercase tracking-wide text-gray-400 mb-2">
+              {company.sector}
+            </p>
+            <p className="text-sm text-gray-200 leading-relaxed text-center">
+              {company.description}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</TabsContent>
 
-                    <CardContent className="space-y-6">
-                      <div>
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="text-sm">Portfolio Allocation</span>
-                          <span className="text-sm">
-                            {sector.allocation}%
-                          </span>
-                        </div>
-                        <Progress value={sector.allocation} className="h-2" />
-                      </div>
 
-                      <div className="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                          <p className="text-muted-foreground mb-1">
-                            Investment Range
-                          </p>
-                          <p>{sector.investment_range}</p>
-                        </div>
-                        <div>
-                          <p className="text-muted-foreground mb-1">
-                            Stage Focus
-                          </p>
-                          <p>{sector.stage}</p>
-                        </div>
-                      </div>
-
-                      <div>
-                        <p className="text-sm mb-2">Focus Areas:</p>
-                        <div className="flex flex-wrap gap-2">
-                          {sector.examples.map((example, idx) => (
-                            <Badge
-                              key={idx}
-                              variant="outline"
-                              className="text-xs"
-                            >
-                              {example}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">
-                          Recent Investments:
-                        </p>
-                        <p className="text-sm">
-                          {sector.recentInvestments.join(", ")}
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="bg-muted/50 rounded-lg p-8">
-              <h3 className="text-xl font-bold mb-4">Private Market Strategy</h3>
-              <p className="text-muted-foreground mb-6">
-                Our private market approach focuses on early-stage companies
-                where we can provide not just capital but also strategic
-                guidance, operational support, and access to our extensive
-                network. We take a patient, long-term approach to value
-                creation.
-              </p>
-              <div className="grid md:grid-cols-3 gap-4">
-                <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-400 bg-gradient-to-br from-blue-50 to-blue-100">
-                  <CardContent className="pt-6 py-8 min-h-[128px]">
-                    <h4 className="mb-2 font-semibold">Check Size</h4>
-                    <p className="text-sm text-muted-foreground">
-                      $500K - $5M per investment, with reserves for follow-on rounds.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-400 bg-gradient-to-br from-green-50 to-green-100">
-                  <CardContent className="pt-6 py-8 min-h-[128px]">
-                    <h4 className="mb-2 font-semibold">Holding Period</h4>
-                    <p className="text-sm text-muted-foreground">
-                      7-10 years average, with flexibility for longer holds.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-400 bg-gradient-to-br from-yellow-50 to-yellow-100">
-                  <CardContent className="pt-6 py-8 min-h-[128px]">
-                    <h4 className="mb-2 font-semibold">Target Returns</h4>
-                    <p className="text-sm text-muted-foreground">
-                      10x+ on successful investments, 3-5x portfolio average.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </TabsContent>
 
           {/* Public Market */}
           <TabsContent value="public" className="space-y-12">
@@ -594,13 +553,26 @@ export const Portfolio = () => {
                 about your vision.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="secondary">
+                <Button 
+                  size="lg" 
+                  variant="secondary"
+                  onClick={() => setShowPitchModal(true)} // ← Open pitch modal
+                >
                   Submit Your Pitch Deck
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
                   className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                  onClick={() => { // ← Navigate to contact with scroll
+                    onPageChange("contact");
+                    setTimeout(() => {
+                      const section = document.getElementById("contact");
+                      if (section) {
+                        section.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }, 300);
+                  }}
                 >
                   Schedule a Meeting
                 </Button>
@@ -609,6 +581,9 @@ export const Portfolio = () => {
           </Card>
         </motion.div>
       </section>
+
+      {/* Pitch Modal ← Render the modal */}
+      <PitchModal isOpen={showPitchModal} onClose={() => setShowPitchModal(false)} />
     </div>
 
 

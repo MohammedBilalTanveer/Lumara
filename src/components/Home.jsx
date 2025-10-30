@@ -1,5 +1,4 @@
-// src/components/Home.jsx
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import CountUp from "react-countup";
 import { Button } from "./ui/button";
@@ -12,9 +11,11 @@ import {
 } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { ArrowRight, Target, TrendingUp, Users, Award } from "lucide-react";
+import { ArrowRight, Target, TrendingUp, Users, Award, X } from "lucide-react";
+import PitchModal from "./PitchModal"; // ← New import for the extracted modal
 
-export const Home = () => {
+export const Home = ({ onPageChange }) => {
+  const [showPitchModal, setShowPitchModal] = useState(false);
   const fadeUp = {
     hidden: { opacity: 0, y: 30, scale: 0.98, willChange: "transform" },
     show: {
@@ -66,27 +67,28 @@ export const Home = () => {
               </h1>
 
               <p className="text-xl text-primary-foreground/90 max-w-lg">
-                {/* UPDATED: Name changed to Lumara */}
-                Lumara is a family office partnering with exceptional
+                Lumara Ventures is a family office partnering with exceptional
                 entrepreneurs and managing diversified investments across
                 private and public markets.
               </p>
 
+              {/* ACTION BUTTONS */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   size="lg"
                   variant="secondary"
                   className="group hover:scale-105 transition-all"
-                  onClick={() => (window.location.href = "/portfolio")}
+                  onClick={() => onPageChange("portfolio")}
                 >
                   Our Portfolio
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
+
                 <Button
                   size="lg"
                   variant="outline"
                   className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary hover:scale-105 transition-all"
-                  onClick={() => (window.location.href = "/thesis")}
+                  onClick={() => onPageChange("investment")}
                 >
                   Investment Thesis
                 </Button>
@@ -167,14 +169,13 @@ export const Home = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* UPDATED: Name changed to Lumara */}
-            <h2 className="text-4xl font-semibold">Why Lumara?</h2>
+            <h2 className="text-4xl font-semibold">Why Lumara Ventures?</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Lumara is a family-backed hybrid investment fund that
-              invests across venture capital and growth equity. Our mission is
-              to back the builders of tomorrow’s India — founders, operators,
-              and teams creating the enabling infrastructure for a modern,
-              formalized, and digital economy.
+              Lumara Ventures is a family-backed hybrid investment fund that invests
+              across venture capital and growth equity. Our mission is to back
+              the builders of tomorrow’s India — founders, operators, and teams
+              creating the enabling infrastructure for a modern, formalized, and
+              digital economy.
             </p>
             <div className="space-y-4">
               {[
@@ -223,14 +224,13 @@ export const Home = () => {
         </motion.div>
 
         <motion.div
-          // UPDATED: Grid changed to md:grid-cols-3 to accommodate 5 items
           className="grid md:grid-cols-3 gap-10"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           variants={{
             hidden: {},
-            show: { transition: { staggerChildren: 0.1 } }, // faster stagger
+            show: { transition: { staggerChildren: 0.1 } },
           }}
         >
           {[
@@ -253,17 +253,10 @@ export const Home = () => {
               gradient: "from-purple-500/10 to-purple-500/5 border-purple-200",
             },
             {
-              title: "Healthcare & Biotech",
+              title: "Logistics",
               description:
-                "Pioneering solutions in healthcare, diagnostics, and biotech innovation.",
+                "Smart supply chain and logistics solutions optimizing transportation, warehousing, and last-mile delivery.",
               gradient: "from-red-500/10 to-red-500/5 border-red-200",
-            },
-            // ADDED: 5th placeholder box as requested
-            {
-              title: "New Focus Area",
-              description:
-                "Describe the new investment focus area here.",
-              gradient: "from-gray-500/10 to-gray-500/5 border-gray-200",
             },
           ].map((focus, i) => (
             <motion.div key={i} variants={fadeUp}>
@@ -284,107 +277,109 @@ export const Home = () => {
         </motion.div>
       </section>
 
-      {/* PORTFOLIO HIGHLIGHTS SECTION */}
-      {/* This section already matches your requirements */}
-      <section className="bg-muted/50 py-24">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="text-center space-y-4 mb-14"
-            initial="hidden"
-            whileInView="show"
-            variants={fadeUp}
-          >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold">
-              Portfolio Highlights
-            </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Recent investments making waves in their industries.
-            </p>
-          </motion.div>
+   {/* PORTFOLIO HIGHLIGHTS SECTION */}
+<section className="bg-muted/50 py-24">
+  <div className="container mx-auto px-4">
+    <motion.div
+      className="text-center space-y-4 mb-14"
+      initial="hidden"
+      whileInView="show"
+      variants={fadeUp}
+    >
+      <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold">
+        Portfolio Highlights
+      </h2>
+      <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+        Recent investments making waves in their industries.
+      </p>
+    </motion.div>
 
-          <motion.div
-            className="grid md:grid-cols-3 gap-10"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: 0.15 } },
-            }}
+    <motion.div
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10"
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      variants={{
+        hidden: {},
+        show: { transition: { staggerChildren: 0.15 } },
+      }}
+    >
+      {[
+        {
+          name: "NSE",
+          description: "India’s leading stock exchange and financial ecosystem",
+          stage: "Established",
+          sector: "Capital Markets",
+          color: "from-blue-400/10 to-blue-600/10 border-blue-300",
+        },
+        {
+          name: "Anand Rathi",
+          description: "Wealth management and financial advisory powerhouse",
+          stage: "Growth",
+          sector: "Financial Services",
+          color: "from-green-400/10 to-green-600/10 border-green-300",
+        },
+        {
+          name: "Tradomate",
+          description: "AI-powered trading platform for smarter trades",
+          stage: "Pre-Series A",
+          sector: "Fintech",
+          color: "from-amber-400/10 to-amber-600/10 border-amber-300",
+        },
+        {
+          name: "Indulge",
+          description:
+            "Premium lifestyle concierge and experience platform",
+          stage: "Series A",
+          sector: "Luxury Services",
+          color: "from-pink-400/10 to-pink-600/10 border-pink-300",
+        },
+        {
+          name: "Das Steign",
+          description:
+            "EV and OEM manufacturing ecosystem in India",
+          stage: "Early Stage",
+          sector: "EV Manufacturing",
+          color: "from-purple-400/10 to-purple-600/10 border-purple-300",
+        },
+      ].map((company, i) => (
+        <motion.div key={i} variants={fadeUp}>
+          <Card
+            className={`hover:shadow-2xl transition-all bg-gradient-to-br ${company.color} rounded-3xl border h-full flex flex-col justify-between`}
           >
-            {[
-              {
-                name: "NSE",
-                description: "India’s leading stock exchange and financial ecosystem",
-                stage: "Established",
-                sector: "Capital Markets",
-                color: "from-blue-400/10 to-blue-600/10 border-blue-300",
-              },
-              {
-                name: "Anand Rathi",
-                description: "Wealth management and financial advisory powerhouse",
-                stage: "Growth",
-                sector: "Financial Services",
-                color: "from-green-400/10 to-green-600/10 border-green-300",
-              },
-              {
-                name: "Tradomate",
-                description: "AI-powered trading platform for smarter trades",
-                stage: "Pre-Series A",
-                sector: "Fintech",
-                color: "from-amber-400/10 to-amber-600/10 border-amber-300",
-              },
-              {
-                name: "Indulge",
-                description: "Premium lifestyle concierge and experience platform",
-                stage: "Series A",
-                sector: "Luxury Services",
-                color: "from-pink-400/10 to-pink-600/10 border-pink-300",
-              },
-              {
-                name: "Das Steign",
-                description: "EV and OEM manufacturing ecosystem in India",
-                stage: "Early Stage",
-                sector: "EV Manufacturing",
-                color: "from-purple-400/10 to-purple-600/10 border-purple-300",
-              },
-            ].map((company, i) => (
-              <motion.div key={i} variants={fadeUp}>
-                <Card
-                  className={`hover:shadow-2xl transition-all h-[220px] bg-gradient-to-br ${company.color} rounded-3xl border`}
-                >
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-2xl font-bold">
-                        {company.name}
-                      </CardTitle>
-                      <Badge variant="outline" className="text-sm">
-                        {company.stage}
-                      </Badge>
-                    </div>
-                    <CardDescription className="text-lg mt-2">
-                      {company.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Badge
-                      variant="secondary"
-                      className="mt-4 px-3 py-1 text-sm"
-                    >
-                      {company.sector}
-                    </Badge>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+            <CardHeader>
+              <div className="flex justify-between items-start">
+                <CardTitle className="text-2xl font-bold">
+                  {company.name}
+                </CardTitle>
+                <Badge variant="outline" className="text-sm">
+                  {company.stage}
+                </Badge>
+              </div>
+              <CardDescription className="text-base sm:text-lg mt-2 leading-relaxed">
+                {company.description}
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent className="mt-auto">
+              <Badge
+                variant="secondary"
+                className="mt-4 px-3 py-1 text-sm sm:text-base"
+              >
+                {company.sector}
+              </Badge>
+            </CardContent>
+          </Card>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+</section>
+
 
       {/* CTA SECTION */}
-      {/* This section's links are already working */}
       <motion.section
-        className="container mx-auto px-4 pt-12 pb-12"
+        className="container mx-auto px-4 pt-12 pb-12 mb-10"
         initial="hidden"
         whileInView="show"
         variants={fadeUp}
@@ -401,7 +396,7 @@ export const Home = () => {
                 size="lg"
                 variant="secondary"
                 className="px-8 hover:scale-105 transition-transform"
-                onClick={() => (window.location.href = "/pitch")}
+                onClick={() => setShowPitchModal(true)}
               >
                 Submit Your Pitch
               </Button>
@@ -409,7 +404,15 @@ export const Home = () => {
                 size="lg"
                 variant="outline"
                 className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary hover:scale-105 transition-transform"
-                onClick={() => (window.location.href = "/contact")}
+                onClick={() => {
+                  onPageChange("contact");
+                  setTimeout(() => {
+                    const section = document.getElementById("contact");
+                    if (section) {
+                      section.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }, 300);
+                }}
               >
                 Get in Touch
               </Button>
@@ -417,6 +420,9 @@ export const Home = () => {
           </CardContent>
         </Card>
       </motion.section>
+
+      {/* Extracted Pitch Modal ← Now a separate component */}
+      <PitchModal isOpen={showPitchModal} onClose={() => setShowPitchModal(false)} />
     </div>
   );
 };

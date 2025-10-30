@@ -1,4 +1,3 @@
-// src/components/Navigation.jsx
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -13,14 +12,14 @@ export const Navigation = ({ currentPage, onPageChange }) => {
     { id: 'portfolio', label: 'Portfolio' },
     // { id: 'investment', label: 'Investment Focus' },
     { id: 'venturestudio', label: 'Venture Studio' },
-    { id: 'philanthropy' , label: 'Philanthropy' },
+    { id: 'philanthropy', label: 'Philanthropy' },
     { id: 'contact', label: 'Contact' },
   ];
 
   // Detect viewport size for responsiveness
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth < 890;
+      const mobile = window.innerWidth < 768; // Match Tailwind 'md' breakpoint
       setIsMobile(mobile);
 
       // If switching to desktop, ensure menu is closed
@@ -29,7 +28,7 @@ export const Navigation = ({ currentPage, onPageChange }) => {
       }
     };
 
-    handleResize(); // run once on mount
+    handleResize(); // Run once on mount
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -38,12 +37,12 @@ export const Navigation = ({ currentPage, onPageChange }) => {
   const handlePageChange = (page) => {
     onPageChange(page);
     if (isMobile) setMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // optional but user-friendly
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
   };
 
   return (
     <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 w-full">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div
@@ -58,7 +57,7 @@ export const Navigation = ({ currentPage, onPageChange }) => {
 
           {/* Desktop Nav */}
           {!isMobile && (
-            <div className="flex items-center space-x-1">
+            <div className="hidden md:flex items-center space-x-1">
               {navItems.map((item) => (
                 <Button
                   key={item.id}
@@ -79,6 +78,7 @@ export const Navigation = ({ currentPage, onPageChange }) => {
           {/* Mobile Hamburger */}
           {isMobile && (
             <Button
+              className="md:hidden"
               variant="ghost"
               size="icon"
               onClick={() => setMenuOpen((prev) => !prev)}
@@ -126,7 +126,7 @@ export const Navigation = ({ currentPage, onPageChange }) => {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="bg-white border-t border-gray-100 shadow-md md:hidden"
+            className="fixed top-16 left-0 w-full bg-white border-t border-gray-100 shadow-md md:hidden z-40"
           >
             <div className="flex flex-col px-4 py-3 space-y-2">
               {navItems.map((item) => (

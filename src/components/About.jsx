@@ -105,7 +105,7 @@ export const About = () => {
   return (
     <div className="space-y-24 overflow-hidden">
       {/* Hero Section (Styled like portfolio.jsx) */}
-      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[60vh] flex items-center justify-center text-center">
+      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[45vh] flex items-center justify-center text-center">
         <motion.div
           initial="hidden"
           animate="show"
@@ -113,12 +113,10 @@ export const About = () => {
           className="max-w-3xl mx-auto px-4"
         >
           <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">
-            About Lumora
+            About Lumora Ventures
           </h1>
           <p className="text-xl text-primary-foreground/90 leading-relaxed">
-            A family office dedicated to partnering with exceptional
-            entrepreneurs and managing diversified investments across private
-            and public markets with a focus on long-term value creation.
+           Lumara Ventures partners with visionary founders and invests across diverse asset classes from private enterprises to public markets driving sustainable growth and long-term value.
           </p>
         </motion.div>
       </section>
@@ -153,7 +151,6 @@ export const About = () => {
 
           <motion.div
             className="space-y-8"
-            whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.35 }}
           >
             <div>
@@ -168,7 +165,7 @@ export const About = () => {
                 </div>
                 <div className="flex space-x-2">
                   <a
-                    href="https://www.linkedin.com"
+                    href="https://www.linkedin.com/in/nikhil-k-s-b75302203/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -383,16 +380,7 @@ export const About = () => {
                         </p>
                       </div>
                     )}
-                    {edu.internship && (
-                      <div>
-                        <h4 className="text-sm font-semibold text-primary mb-2">
-                          Internship:
-                        </h4>
-                        <p className="text-sm text-muted-foreground">
-                          {edu.internship}
-                        </p>
-                      </div>
-                    )}
+
                   </CardContent>
                 </Card>
               </motion.div>

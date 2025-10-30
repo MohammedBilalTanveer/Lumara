@@ -8,19 +8,25 @@ import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Badge } from './ui/badge';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { motion } from 'framer-motion';
 import {
   MailIcon,
   PhoneIcon,
   MapPinIcon,
   LinkedinIcon,
-  TwitterIcon,
   CalendarIcon,
   FileTextIcon,
   MessageCircleIcon,
   RocketIcon
 } from 'lucide-react';
-
-export const Contact = () => {
+import { useState } from 'react';
+import PitchModal from './PitchModal';
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+export const Contact = ({onPageChange}) => {
+  const [showPitchModal, setShowPitchModal] = useState(false);
   const contactMethods = [
     {
       icon: MailIcon,
@@ -43,13 +49,6 @@ export const Contact = () => {
       contact: '/in/nikhil-ks-vc',
       action: 'Connect'
     },
-    {
-      icon: TwitterIcon,
-      title: 'Twitter',
-      description: 'Follow us for updates and insights',
-      contact: '@Lumora',
-      action: 'Follow'
-    }
   ];
 
   const inquiryTypes = [
@@ -91,7 +90,7 @@ export const Contact = () => {
   return (
     <div className="bg-white text-foreground overflow-hidden">
       {/* HERO HEADER */}
-      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[50vh] flex items-center justify-center text-center">
+      <section id='contact' className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[50vh] flex items-center justify-center text-center">
         <div className="max-w-3xl mx-auto px-4">
           <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">
             Get in Touch
@@ -102,42 +101,45 @@ export const Contact = () => {
         </div>
       </section>
 
-      {/* CONTACT METHODS */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="text-center space-y-4 mb-16">
-          <h2 className="text-4xl font-bold">Reach Out</h2>
-          <p className="text-muted-foreground max-w-3xl mx-auto text-lg">
-            Choose a method that works best for you — email, meeting, or social.
-          </p>
-        </div>
+{/* CONTACT METHODS */}
+<section className="container mx-auto px-4 py-20">
+  <div className="text-center space-y-4 mb-16">
+    <h2 className="text-4xl font-bold">Reach Out</h2>
+    <p className="text-muted-foreground max-w-3xl mx-auto text-lg">
+      Choose a method that works best for you — email, meeting, or social.
+    </p>
+  </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {contactMethods.map((method, index) => (
-            <Card
-              key={index}
-              className="group rounded-3xl border border-gray-100 shadow-md hover:shadow-xl transition-all bg-white text-center"
+  <div className="flex flex-wrap justify-center gap-8">
+    {contactMethods.map((method, index) => (
+      <div key={index} className="w-full sm:w-1/2 lg:w-1/4 max-w-xs flex-shrink-0">
+        <Card
+          className="group rounded-3xl border border-gray-100 shadow-md hover:shadow-xl transition-all bg-white text-center h-full"
+        >
+          <CardContent className="pt-8 pb-8 space-y-5 flex flex-col justify-between h-full">
+            <div className="space-y-5">
+              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                <method.icon className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-1">{method.title}</h3>
+                <p className="text-sm text-muted-foreground mb-2">{method.description}</p>
+                <p className="text-sm">{method.contact}</p>
+              </div>
+            </div>
+            <Button
+              size="sm"
+              variant="outline"
+              className="group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary"
             >
-              <CardContent className="pt-8 pb-8 space-y-5">
-                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  <method.icon className="h-6 w-6" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-1">{method.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-2">{method.description}</p>
-                  <p className="text-sm">{method.contact}</p>
-                </div>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary"
-                >
-                  {method.action}
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+              {method.action}
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    ))}
+  </div>
+</section>
 
       {/* CONTACT FORM */}
       <section className="container mx-auto px-4 pb-20">
@@ -396,29 +398,55 @@ export const Contact = () => {
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section className="container mx-auto px-4 pb-20">
-        <Card className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground rounded-3xl shadow-lg">
-          <CardContent className="text-center py-16">
-            <h2 className="text-4xl font-bold mb-4">Ready to Build Something Amazing?</h2>
-            <p className="text-xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
-              Whether you're just getting started or ready to scale, we're here to support ambitious founders building the future.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className='hover:bg-transparent hover:text-white hover:border-white hover:border'>
-                Schedule a Meeting
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-              >
-                Send Your Pitch Deck
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+  <section className="container mx-auto px-4 pb-24">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          variants={fadeUp}
+          viewport={{ once: true }}
+        >
+          <Card className="bg-primary text-primary-foreground rounded-3xl shadow-lg border-none overflow-hidden">
+            <CardContent className="text-center py-16">
+              <h2 className="text-3xl lg:text-4xl font-extrabold mb-4">
+                Ready to Partner With Us?
+              </h2>
+              <p className="text-xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto leading-relaxed">
+                Whether you're raising capital for your startup or have an
+                exceptional investment opportunity, we'd love to learn more
+                about your vision.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  size="lg" 
+                  variant="secondary"
+                  onClick={() => setShowPitchModal(true)} // ← Open pitch modal
+                >
+                  Submit Your Pitch Deck
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                  onClick={() => { // ← Navigate to contact with scroll
+                    onPageChange("contact");
+                    setTimeout(() => {
+                      const section = document.getElementById("contact");
+                      if (section) {
+                        section.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }, 300);
+                  }}
+                >
+                  Schedule a Meeting
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       </section>
+
+      {/* Pitch Modal ← Render the modal */}
+      <PitchModal isOpen={showPitchModal} onClose={() => setShowPitchModal(false)} />
     </div>
   );
 };

@@ -19,7 +19,7 @@ export default function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <Home />;
+        return <Home onPageChange={setCurrentPage} />;
       case 'about':
         return <About />;
       case 'portfolio':
@@ -41,7 +41,7 @@ export default function App() {
     <div className="min-h-screen bg-background">
       <Navigation currentPage={currentPage} onPageChange={setCurrentPage} />
       <main>{renderPage()}</main>
-          <Footer currentPage={currentPage} onPageChange={setCurrentPage} />
+      <Footer currentPage={currentPage} onPageChange={setCurrentPage} />
 
     </div>
   );

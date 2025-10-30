@@ -127,7 +127,7 @@ export const VentureStudio = () => {
   return (
     <div className="space-y-24 overflow-hidden">
       {/* HERO */}
-      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[60vh] flex items-center justify-center text-center">
+      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[45vh] flex items-center justify-center text-center">
         <motion.div
           initial="hidden"
           animate="show"

@@ -9,8 +9,7 @@ import {
 
 export const Footer = ({ currentPage, onPageChange }) => {
   const socialLinks = [
-    { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/company/Lumara' },
-    { icon: TwitterIcon, label: 'Twitter', href: 'https://twitter.com/Lumara' },
+    { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/nikhil-k-s-b75302203/' },
     { icon: MailIcon, label: 'Email', href: 'mailto:hello@Lumara.com' },
   ];
 
@@ -35,14 +34,14 @@ export const Footer = ({ currentPage, onPageChange }) => {
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
               <span className="text-primary-foreground font-semibold">L</span>
             </div>
-            <span className="text-xl font-bold">Lumara</span>
+            <span className="text-xl font-bold">Lumara Ventures</span>
           </div>
           <p className="text-sm text-muted-foreground">
             A family office partnering with exceptional entrepreneurs and managing diversified investments across private and public markets.
           </p>
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <MapPinIcon className="h-4 w-4" />
-            <span>123 Market Street, Suite 456, San Francisco, CA 94105</span>
+            <span>MG Road, Bengaluru</span>
           </div>
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <MailIcon className="h-4 w-4" />
@@ -92,7 +91,7 @@ export const Footer = ({ currentPage, onPageChange }) => {
           </div>
 
           <p className="mt-4 text-xs text-gray-500">
-            © {new Date().getFullYear()} Lumara. All rights reserved.
+            © {new Date().getFullYear()} Lumara ventures. All rights reserved.
           </p>
         </div>
       </div>
