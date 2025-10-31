@@ -64,39 +64,7 @@ const CountUp = ({ target, duration = 2 }) => {
 };
 
 export const Philanthropy = () => {
-  const impactStats = [
-    {
-      icon: UsersIcon,
-      value: "6,000+",
-      label: "Individuals Impacted Annually",
-      description:
-        "Lives touched through our education and healthcare initiatives",
-      gradient: "from-blue-50 to-blue-100",
-    },
-    {
-      icon: TrendingUpIcon,
-      value: "₹8 Cr+",
-      label: "Donated Annually",
-      description: "Committed to creating sustainable social impact",
-      gradient: "from-green-50 to-green-100",
-    },
-    {
-      icon: GraduationCapIcon,
-      value: "50+",
-      label: "College Scholarships",
-      description:
-        "Supporting students to achieve their educational dreams",
-      gradient: "from-purple-50 to-purple-100",
-    },
-    {
-      icon: ActivityIcon,
-      value: "4,000+",
-      label: "Health Screenings",
-      description:
-        "Annual health camp screenings across communities",
-      gradient: "from-rose-50 to-rose-100",
-    },
-  ];
+
 
   const educationPrograms = [
     {
@@ -237,48 +205,6 @@ export const Philanthropy = () => {
           </p>
         </motion.div>
       </section>
-
-      {/* Impact Statistics */}
-      <motion.section
-        className="container mx-auto px-4"
-        initial="hidden"
-        whileInView="show"
-        variants={fadeUp}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <h2 className="text-3xl text-center mb-12 font-bold">
-          Our Impact by the Numbers
-        </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-          {impactStats.map((stat, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.04 }}
-              transition={{ duration: 0.35 }}
-              className="h-full"
-            >
-              <Card
-                className={`h-full flex flex-col rounded-3xl border-none shadow-md hover:shadow-xl bg-gradient-to-br ${stat.gradient} transition-all duration-400`}
-              >
-                <CardHeader>
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <stat.icon className="h-5 w-5 text-primary" />
-                    {stat.label}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-3xl font-bold mb-2">
-                    <CountUp target={stat.value} />
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {stat.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
 
       {/* Focus Areas */}
       <motion.section

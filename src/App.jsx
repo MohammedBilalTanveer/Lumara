@@ -8,6 +8,7 @@ import { Philanthropy } from './components/Philanthropy';
 import { Contact } from './components/Contact';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
+import { Toaster } from 'react-hot-toast';
 
 /**
  * @typedef {'home'|'about'|'portfolio'|'investment'|'venturestudio'|'news'|'contact'} Page
@@ -23,7 +24,7 @@ export default function App() {
       case 'about':
         return <About />;
       case 'portfolio':
-        return <Portfolio />;
+        return <Portfolio onPageChange={setCurrentPage}/>;
       case 'venturestudio':
         return <VentureStudio />;
       case 'philanthropy':
@@ -31,7 +32,7 @@ export default function App() {
       case 'news':
         return <News />;
       case 'contact':
-        return <Contact />;
+        return <Contact onPageChange={setCurrentPage}/>;
       default:
         return <Home />;
     }
@@ -42,7 +43,7 @@ export default function App() {
       <Navigation currentPage={currentPage} onPageChange={setCurrentPage} />
       <main>{renderPage()}</main>
       <Footer currentPage={currentPage} onPageChange={setCurrentPage} />
-
+      <Toaster position="bottom-right" className='bg-black text-white' />
     </div>
   );
 }

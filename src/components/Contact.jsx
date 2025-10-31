@@ -1,5 +1,5 @@
 // src/components/Contact.jsx
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -19,35 +19,99 @@ import {
   MessageCircleIcon,
   RocketIcon
 } from 'lucide-react';
-import { useState } from 'react';
 import PitchModal from './PitchModal';
+import emailjs from '@emailjs/browser';
+import { toast } from 'react-hot-toast';
+
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
-export const Contact = ({onPageChange}) => {
+
+export const Contact = ({ onPageChange }) => {
   const [showPitchModal, setShowPitchModal] = useState(false);
+  const formRef = useRef(null);
+  const [isSending, setIsSending] = useState(false);
+
+  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "";
+  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "";
+  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      toast.error(
+        "EmailJS is not configured — set VITE_EMAILJS_* environment variables.",
+        { position: "bottom-right" }
+      );
+      return;
+    }
+
+    setIsSending(true);
+    emailjs
+      .sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        () => {
+          toast.success("Message sent successfully ✅", {
+            position: "bottom-right",
+          });
+          formRef.current.reset();
+          setIsSending(false);
+        },
+        (error) => {
+          console.error("EmailJS Error:", error);
+          toast.error("Failed to send message ❌ Try again later.", {
+            position: "bottom-right",
+          });
+          setIsSending(false);
+        }
+      );
+  };
+
+  const handleEmailClick = () => {
+    window.location.href = 'mailto:hello@lumara.com';
+  };
+
+  const handleScheduleMeeting = () => {
+    const formSection = document.getElementById('form-meet');
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleLinkedInConnect = () => {
+    window.open('https://www.linkedin.com/in/nikhil-k-s-b75302203/', '_blank');
+  };
+
   const contactMethods = [
     {
       icon: MailIcon,
       title: 'Email',
       description: 'Get in touch via email',
-      contact: 'hello@lumaraventures.com',
-      action: 'Send Email'
+      contact: 'hello@lumara.com',
+      action: 'Send Email',
+      onClick: handleEmailClick
     },
     {
       icon: CalendarIcon,
       title: 'Schedule a Meeting',
       description: 'Book time to discuss your startup',
       contact: '30-minute intro call',
-      action: 'Book Meeting'
+      action: 'Book Meeting',
+      onClick: handleScheduleMeeting
     },
     {
       icon: LinkedinIcon,
       title: 'LinkedIn',
       description: 'Connect with Nikhil K S on LinkedIn',
-      contact: '/in/nikhil-ks-vc',
-      action: 'Connect'
+      contact: 'Nikhil K S',
+      action: 'Connect',
+      onClick: handleLinkedInConnect
     },
   ];
 
@@ -101,48 +165,49 @@ export const Contact = ({onPageChange}) => {
         </div>
       </section>
 
-{/* CONTACT METHODS */}
-<section className="container mx-auto px-4 py-20">
-  <div className="text-center space-y-4 mb-16">
-    <h2 className="text-4xl font-bold">Reach Out</h2>
-    <p className="text-muted-foreground max-w-3xl mx-auto text-lg">
-      Choose a method that works best for you — email, meeting, or social.
-    </p>
-  </div>
+      {/* CONTACT METHODS */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="text-center space-y-4 mb-16">
+          <h2 className="text-4xl font-bold">Reach Out</h2>
+          <p className="text-muted-foreground max-w-3xl mx-auto text-lg">
+            Choose a method that works best for you — email, meeting, or social.
+          </p>
+        </div>
 
-  <div className="flex flex-wrap justify-center gap-8">
-    {contactMethods.map((method, index) => (
-      <div key={index} className="w-full sm:w-1/2 lg:w-1/4 max-w-xs flex-shrink-0">
-        <Card
-          className="group rounded-3xl border border-gray-100 shadow-md hover:shadow-xl transition-all bg-white text-center h-full"
-        >
-          <CardContent className="pt-8 pb-8 space-y-5 flex flex-col justify-between h-full">
-            <div className="space-y-5">
-              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                <method.icon className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-1">{method.title}</h3>
-                <p className="text-sm text-muted-foreground mb-2">{method.description}</p>
-                <p className="text-sm">{method.contact}</p>
-              </div>
+        <div className="flex flex-wrap justify-center gap-8">
+          {contactMethods.map((method, index) => (
+            <div key={index} className="w-full sm:w-1/2 lg:w-1/4 max-w-xs flex-shrink-0">
+              <Card
+                className="group rounded-3xl border border-gray-100 shadow-md hover:shadow-xl transition-all bg-white text-center h-full"
+              >
+                <CardContent className="pt-8 pb-8 space-y-5 flex flex-col justify-between h-full">
+                  <div className="space-y-5">
+                    <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                      <method.icon className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg mb-1">{method.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-2">{method.description}</p>
+                      <p className="text-sm">{method.contact}</p>
+                    </div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary"
+                    onClick={method.onClick}
+                  >
+                    {method.action}
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
-            <Button
-              size="sm"
-              variant="outline"
-              className="group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary"
-            >
-              {method.action}
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    ))}
-  </div>
-</section>
+          ))}
+        </div>
+      </section>
 
       {/* CONTACT FORM */}
-      <section className="container mx-auto px-4 pb-20">
+      <section className="container mx-auto px-4 pb-20" id='form-meet'>
         <div className="grid lg:grid-cols-2 gap-12">
           {/* FORM */}
           <div>
@@ -154,68 +219,72 @@ export const Contact = ({onPageChange}) => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
+                <form ref={formRef} onSubmit={sendEmail}>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName">First Name *</Label>
+                      <Input id="firstName" name="firstName" required placeholder="John" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName">Last Name *</Label>
+                      <Input id="lastName" name="lastName" required placeholder="Doe" />
+                    </div>
+                  </div>
+
                   <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name *</Label>
-                    <Input id="firstName" placeholder="John" />
+                    <Label htmlFor="user_email">Email *</Label>
+                    <Input id="user_email" name="user_email" type="email" required placeholder="john@company.com" />
                   </div>
+
                   <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name *</Label>
-                    <Input id="lastName" placeholder="Doe" />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
-                  <Input id="email" type="email" placeholder="john@company.com" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="company">Company</Label>
-                  <Input id="company" placeholder="Your company name" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="inquiryType">Inquiry Type *</Label>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select inquiry type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="fundraising">Fundraising</SelectItem>
-                      <SelectItem value="partnership">Partnership</SelectItem>
-                      <SelectItem value="press">Press & Media</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject *</Label>
-                  <Input id="subject" placeholder="Brief subject line" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message *</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Tell us about your startup, partnership opportunity, or inquiry..."
-                    className="min-h-[120px]"
-                  />
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-2">
-                    <input type="checkbox" id="privacy" className="mt-1" />
-                    <Label htmlFor="privacy" className="text-sm text-muted-foreground">
-                      I agree to the privacy policy and terms of service
-                    </Label>
+                    <Label htmlFor="company">Company</Label>
+                    <Input id="company" name="company" placeholder="Your company name" />
                   </div>
 
-                  <Button size="lg" className="w-full">
-                    Send Message
-                  </Button>
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="inquiryType">Inquiry Type *</Label>
+                    <Select name="inquiryType" required>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select inquiry type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="fundraising">Fundraising</SelectItem>
+                        <SelectItem value="partnership">Partnership</SelectItem>
+                        <SelectItem value="press">Press & Media</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Subject *</Label>
+                    <Input id="subject" name="subject" required placeholder="Brief subject line" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message *</Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      required
+                      placeholder="Tell us about your startup, partnership opportunity, or inquiry..."
+                      className="min-h-[120px]"
+                    />
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-2">
+                      <input type="checkbox" id="privacy" name="privacy" required className="mt-1" />
+                      <Label htmlFor="privacy" className="text-sm text-muted-foreground">
+                        I agree to the privacy policy and terms of service
+                      </Label>
+                    </div>
+
+                    <Button size="lg" type="submit" disabled={isSending} className="w-full">
+                      {isSending ? "Sending..." : "Send Message"}
+                    </Button>
+                  </div>
+                </form>
               </CardContent>
             </Card>
           </div>
@@ -398,7 +467,7 @@ export const Contact = ({onPageChange}) => {
         </div>
       </section>
 
-  <section className="container mx-auto px-4 pb-24">
+      <section className="container mx-auto px-4 pb-24">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -430,7 +499,7 @@ export const Contact = ({onPageChange}) => {
                   onClick={() => { // ← Navigate to contact with scroll
                     onPageChange("contact");
                     setTimeout(() => {
-                      const section = document.getElementById("contact");
+                      const section = document.getElementById("form-meet");
                       if (section) {
                         section.scrollIntoView({ behavior: "smooth" });
                       }

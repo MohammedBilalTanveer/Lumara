@@ -3,9 +3,10 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser"; // ← Assuming you have this installed; npm i @emailjs/browser
 import { Button } from "./ui/button"; // Adjust path as needed
 import { X } from "lucide-react";
+import { toast } from "react-hot-toast";
 
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "";
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || ""; // Use a pitch-specific template if needed
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_2 || "";
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
 
 export default function PitchModal({ isOpen, onClose }) {
@@ -14,23 +15,36 @@ export default function PitchModal({ isOpen, onClose }) {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    setIsSending(true);
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      toast.error(
+        "EmailJS is not configured — set VITE_EMAILJS_* environment variables.",
+        { position: "bottom-right" }
+      );
+      return;
+    }
 
+    setIsSending(true);
     emailjs
       .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formRef.current, EMAILJS_PUBLIC_KEY)
       .then(
-        (result) => {
-          console.log("Email sent successfully:", result.text);
-          alert("Pitch submitted successfully! We'll review it soon.");
-          onClose();
+        () => {
+          toast.success("Pitch submitted successfully! We'll review it soon. ✅", {
+            position: "bottom-right",
+            style: { background: "black", color: "white" },
+          });
           formRef.current?.reset();
+          onClose();
+          setIsSending(false);
         },
         (error) => {
           console.error("Failed to send email:", error.text);
-          alert("Failed to submit pitch. Please try again.");
+          toast.error("Failed to submit pitch ❌ Try again later.", {
+            position: "bottom-right",
+            style: { background: "black", color: "white"},
+          });
+          setIsSending(false);
         }
-      )
-      .finally(() => setIsSending(false));
+      );
   };
 
   if (!isOpen) return null;
