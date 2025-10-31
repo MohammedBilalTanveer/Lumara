@@ -116,8 +116,7 @@ export const About = () => {
             About Lumora Ventures
           </h1>
           <p className="text-xl text-primary-foreground/90 leading-relaxed">
-           Lumara Ventures partners with visionary founders and invests across diverse asset classes from private enterprises to public markets driving sustainable growth and long-term value.
-          </p>
+Lumara Ventures partners with visionary founders, investing across private enterprises to public markets to drive sustainable growth and long-term value.          </p>
         </motion.div>
       </section>
 
