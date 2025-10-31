@@ -37,7 +37,10 @@ export const Navigation = ({ currentPage, onPageChange }) => {
   const handlePageChange = (page) => {
     onPageChange(page);
     if (isMobile) setMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+    // Smooth scroll to top after a brief delay to allow page change
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100); // Small delay ensures page renders first
   };
 
   return (

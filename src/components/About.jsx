@@ -110,7 +110,7 @@ export const About = () => {
           initial="hidden"
           animate="show"
           variants={fadeUp}
-          className="max-w-3xl mx-auto px-4"
+          className="max-w-3xl mx-auto px-4 p-4"
         >
           <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">
             About Lumora Ventures
