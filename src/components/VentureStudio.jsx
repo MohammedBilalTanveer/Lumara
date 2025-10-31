@@ -102,9 +102,8 @@ export const VentureStudio = ({ onPageChange }) => {
       stage: "In Development",
       status: "Building MVP",
       team: "2 co-founders",
-      launch: "Q2 2026",
+      launch: "2026",
       focus: "Fintech & AI",
-      progress: 65,
     },
     {
       name: "Indulge",
@@ -112,9 +111,8 @@ export const VentureStudio = ({ onPageChange }) => {
       stage: "Series A",
       status: "Market Testing",
       team: "3 co-founders",
-      launch: "Q4 2024",
+      launch: "2022",
       focus: "Luxury Services",
-      progress: 75,
     },
     {
       name: "Das Steigen",
@@ -124,7 +122,6 @@ export const VentureStudio = ({ onPageChange }) => {
       team: "2 co-founders",
       launch: "2024",
       focus: "EV manufacturing",
-      progress: 45,
     },
     {
       name: "Tradomate",
@@ -134,14 +131,13 @@ export const VentureStudio = ({ onPageChange }) => {
       team: "2 co-founders",
       launch: "2024",
       focus: "Fintech & AI",
-      progress: 15,
     },
   ];
 
   return (
     <div className="space-y-24 overflow-hidden">
       {/* HERO */}
-      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center text-center">
+      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[40vh] flex items-center justify-center text-center">
         <motion.div
           ref={heroRef}
           initial="hidden"
@@ -162,7 +158,7 @@ export const VentureStudio = ({ onPageChange }) => {
       {/* ACTIVE PROJECTS */}
       <motion.section
         ref={projectsRef}
-        className="container mx-auto px-4 min-h-[50vh]"
+        className="container mx-auto px-4 min-h-[40vh]"
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-50px" }}
@@ -205,28 +201,14 @@ export const VentureStudio = ({ onPageChange }) => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4 flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-xs sm:text-sm text-muted-foreground">
-                        Progress
-                      </span>
-                      <span className="text-xs sm:text-sm">{project.progress}%</span>
-                    </div>
-                    <Progress
-                      value={project.progress}
-                      className="h-2 rounded-full"
-                    />
-                  </div>
+                 
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
                     <div>
                       <p className="text-muted-foreground mb-1">Status</p>
                       <p>{project.status}</p>
                     </div>
-                    <div>
-                      <p className="text-muted-foreground mb-1">Team</p>
-                      <p>{project.team}</p>
-                    </div>
+                   
                   </div>
 
                   <div className="flex flex-col sm:flex-row items-end sm:items-center justify-between pt-3 border-t border-border/50 gap-2">
@@ -382,7 +364,7 @@ export const VentureStudio = ({ onPageChange }) => {
       {/* ENHANCED STUDIO ADVANTAGES */}
       <section
         ref={advantagesRef}
-        className="bg-muted/50 py-15 min-h-[60vh]"
+        className="bg-muted/50 min-h-[50vh]"
       >
         <motion.div
           className="container mx-auto px-4"

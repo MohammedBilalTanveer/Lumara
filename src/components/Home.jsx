@@ -47,10 +47,10 @@ export const Home = ({ onPageChange }) => {
       };
 
   const stats = [
-    { icon: Target, value: 50, suffix: "M+", label: "Assets Under Management" },
     { icon: TrendingUp, value: 10, suffix: "+", label: "Portfolio Companies" },
     { icon: Users, value: 100, suffix: "+", label: "Jobs Created" },
     { icon: Award, value: 4, suffix: "", label: "Successful Exits" },
+    { icon: Target, value: 18, suffix: "%", label: "CAGR" },
   ];
 
   const statsRef = useRef(null);
@@ -78,7 +78,7 @@ export const Home = ({ onPageChange }) => {
               <h1 className="text-5xl lg:text-7xl font-extrabold leading-tight">
                 Where bright ideas
                 <motion.span
-                  className="block text-accent-foreground bg-accent px-4 py-2 rounded-lg mt-3 inline-block shadow-lg"
+                  className="text-accent-foreground bg-accent px-4 py-2 rounded-lg mt-3 inline-block shadow-lg"
                   whileHover={shouldReduceMotion ? {} : { scale: 1.02 }} // Reduced scale and no spring for perf
                   transition={shouldReduceMotion ? {} : { duration: 0.2 }}
                 >

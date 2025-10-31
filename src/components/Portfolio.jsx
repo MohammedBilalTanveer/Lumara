@@ -230,11 +230,7 @@ export const Portfolio = ({ onPageChange }) => {
   ];
 
   // Stats data for overview
-  const stats = [
-    { label: "Assets Under Management", end: 50, suffix: "M+" },
-    { label: "Portfolio Companies & Positions", end: 10, suffix: "+" },
-    { label: "Limited Partners & Co-Investors", end: 15, suffix: "+" },
-  ];
+
 
   const statsRef = useRef(null);
   const [statsInView, setStatsInView] = useState(false);
@@ -300,7 +296,7 @@ export const Portfolio = ({ onPageChange }) => {
   return (
     <div className="space-y-24 overflow-hidden">
       {/* HERO Section */}
-      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[45vh] flex items-center justify-center text-center">
+      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground min-h-[40vh] flex items-center justify-center text-center">
         <motion.div
           initial="hidden"
           animate="show"
@@ -317,44 +313,6 @@ export const Portfolio = ({ onPageChange }) => {
           </p>
         </motion.div>
       </section>
-
-      {/* Stats / Fund Overview */}
-      <motion.section
-        ref={statsRef}
-        className="container mx-auto px-4 -mt-12"
-        initial="hidden"
-        whileInView="show"
-        variants={fadeUp}
-        viewport={{ once: true }}
-      >
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: shouldReduceMotion ? 1 : 1.03 }}
-              transition={{ duration: 0.35 }}
-            >
-              <Card className="bg-gradient-to-br from-primary to-primary/80 text-white rounded-2xl shadow-lg border-none hover:shadow-primary/40 transition-all duration-400">
-                <CardContent className="pt-8 pb-10 text-center">
-                  <div className="text-3xl md:text-4xl font-bold mb-2">
-                    {statsInView ? (
-                      <CountUp
-                        end={stat.end}
-                        duration={2}
-                        suffix={stat.suffix}
-                        decimals={stat.end % 1 !== 0 ? 1 : 0}
-                      />
-                    ) : (
-                      0
-                    )}
-                  </div>
-                  <p className="text-white/90">{stat.label}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
 
       {/* Tabbed Investment Focus */}
       <section className="container mx-auto px-4">
@@ -441,21 +399,13 @@ export const Portfolio = ({ onPageChange }) => {
 
               {/* Text box */}
               <div
-                className="relative z-10 bg-gray-800/60 text-white backdrop-blur-sm rounded-2xl p-5 sm:p-8 md:p-10 max-w-4xl w-full sm:w-11/12 md:w-4/5 lg:w-3/4"
+                className="relative z-10 bg-[#ffffff45] text-black backdrop-blur-sm rounded-2xl p-5 sm:p-8 md:p-10 max-w-4xl w-full sm:w-11/12 md:w-4/5 lg:w-3/4"
               >
                 <p className="mb-5 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed">
-                  Lumara Ventures invests in listed equities in India through an AIF managed
-                  by professionals with deep expertise in the space. We intend to build a
-                  concentrated portfolio with an optimal mix of mid-size businesses and
-                  large caps. Investments will be focused on companies with a strong
-                  governance ethic, that are structurally solid and in an accelerating
-                  earnings cycle.
+                  At Lumara Ventures, we pursue investments in Indian listed equities via an AIF managed by a team with extensive domain expertise. Our portfolio construction emphasizes concentration and quality, blending mid-sized enterprises with large-cap leaders. We invest in businesses that demonstrate strong governance, sound fundamentals, and clear earnings acceleration.
                 </p>
                 <p className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed">
-                  While we are sector agnostic, our focus is in Financials, Consumer,
-                  Healthcare, and Technology — with a bias for leaders that have a
-                  competitive advantage in the digital space and brands that are resilient
-                  to disruption.
+                  Although sector-neutral in approach, we maintain strategic focus in FinTech, Electric Vehicles, Logistics, and Healthcare, favoring companies with sustainable digital advantages and resilient business models.
                 </p>
               </div>
             </div>

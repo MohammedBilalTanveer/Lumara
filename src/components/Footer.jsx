@@ -10,7 +10,7 @@ import {
 export const Footer = ({ currentPage, onPageChange }) => {
   const socialLinks = [
     { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/nikhil-k-s-b75302203/' },
-    { icon: MailIcon, label: 'Email', href: 'mailto:hello@Lumara.com' },
+    { icon: MailIcon, label: 'Email', href: 'mailto:hello@Lumaraventures.com' },
   ];
 
   // Use same page IDs as Navigation.jsx
@@ -18,9 +18,19 @@ export const Footer = ({ currentPage, onPageChange }) => {
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'portfolio', label: 'Portfolio' },
-    { id: 'news', label: 'Insights' },
+    { id: 'venturestudio', label: 'Venture Studio' },
+    { id: 'philanthropy', label: 'Philanthropy' },
     { id: 'contact', label: 'Contact' },
   ];
+
+  // Handle quick link click with scroll to top
+  const handleQuickLinkClick = (id) => {
+    onPageChange(id);
+    // Scroll to top after a brief delay to allow re-render
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
 
   return (
     <footer className="bg-white text-gray-800">
@@ -45,7 +55,7 @@ export const Footer = ({ currentPage, onPageChange }) => {
           </div>
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <MailIcon className="h-4 w-4" />
-            <span>hello@Lumara.com</span>
+            <span>hello@Lumaraventures.com</span>
           </div>
         </div>
 
@@ -56,8 +66,8 @@ export const Footer = ({ currentPage, onPageChange }) => {
             {quickLinks.map((link) => (
               <li key={link.id}>
                 <button
-                  onClick={() => onPageChange(link.id)}
-                  className="hover:text-primary transition-colors"
+                  onClick={() => handleQuickLinkClick(link.id)}
+                  className="hover:text-primary transition-colors cursor-pointer"
                 >
                   {link.label}
                 </button>
